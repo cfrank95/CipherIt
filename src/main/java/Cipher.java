@@ -1,7 +1,7 @@
 public abstract class Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString) {
+  public  StringBuilder encrypt(String plainString, int offset) {
     return null;
   }
 
@@ -14,7 +14,7 @@ public abstract class Cipher implements CipherControl {
 class Atbash extends Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString) {
+  public  StringBuilder encrypt(String plainString, int offset) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -91,3 +91,29 @@ class Atbash extends Cipher implements CipherControl {
   }
 
 }
+
+class Caesar extends Cipher implements CipherControl {
+
+  @Override
+  public  StringBuilder encrypt(String plainString, int offset) {
+    // StringBuilder to hold encrypted String
+    StringBuilder encryptedString = new StringBuilder();
+
+    // User inputs String to be encrypted and integer to offset characters
+
+
+    System.out.println("Enter offset: ");
+
+    // loop adding each ASCII character by the offset provided
+    for(int i = 0; i < plainString.length(); i++){
+      char letter = plainString.charAt(i);
+      int letterInt = letter + offset;
+
+      encryptedString.append((char)letterInt);
+    }
+
+    return encryptedString;
+  }
+}
+
+

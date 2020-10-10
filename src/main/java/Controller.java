@@ -12,15 +12,16 @@ public class Controller {
   static Scanner keyboard = new Scanner(System.in);
   public TextField messageString;
   public ChoiceBox choiceBox;
+  public ChoiceBox offsetChoice;
 
 
   @FXML
-
   private TextField lblOutput;
 
 
   public void initialize() {
     choiceBoxSelect();
+    offsetSelect();
   }
 
   /**
@@ -35,6 +36,17 @@ public class Controller {
 
   }
 
+  /**
+   * populates choice box on Product Line tab
+   */
+  public void offsetSelect() {
+    for (int i = 0; i < 5; i++) {
+      offsetChoice.getItems().add(i);
+    }
+
+
+  }
+
 
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
@@ -43,8 +55,10 @@ public class Controller {
     switch (cipherType) {
       case Atbash:
         Cipher Atbash = new Atbash();
-        lblOutput.setText(Atbash.encrypt(plainString).toString());
+        lblOutput.setText(Atbash.encrypt(plainString, 0).toString());
       case Caesar:
+        Cipher Caesar = new Caesar();
+        lblOutput.setText(Caesar.encrypt(plainString, 0).toString());
 
     }
 
@@ -59,6 +73,9 @@ public class Controller {
         Cipher Atbash = new Atbash();
         lblOutput.setText(Atbash.decrypt(plainString).toString());
       case Caesar:
+        int offset = (int) offsetChoice.getValue();
+        Cipher Caesar = new Caesar();
+        lblOutput.setText(Caesar.decrypt(plainString).toString());
     }
   }
 }
