@@ -96,14 +96,12 @@ public class Controller {
 
     }
     return decipher;
-
   }
 
 
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
     lblOutput.setText(atbashCiphering(plainString).toString());
-
   }
 
   public void decrypt(MouseEvent mouseEvent) {
