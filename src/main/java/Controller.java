@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 
-public class Controller extends Cipher{
+public class Controller {
 
   static Scanner keyboard = new Scanner(System.in);
   public TextField messageString;
@@ -19,7 +19,7 @@ public class Controller extends Cipher{
   private TextField lblOutput;
 
 
-  public void initialize(){
+  public void initialize() {
     choiceBoxSelect();
   }
 
@@ -35,98 +35,30 @@ public class Controller extends Cipher{
 
   }
 
-  public static StringBuilder atbashCiphering(String plainString) {
-
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String alphaLower = "abcdefghijklmnopqrstuvwxyz";
-
-    int strLength = plainString.length();
-    int alphLength = alphabet.length();
-    StringBuilder cipher = new StringBuilder("");
-
-    for (int i = 0; i < strLength; i++) {
-      char b = plainString.charAt(i);
-      if (b == ' ') {
-        cipher.append(" ");
-      }
-
-      for (int j = 0; j < alphLength; j++) {
-        char c = alphabet.charAt(j);
-        char d = alphaLower.charAt(j);
-
-        if (c == b) {
-          int index = alphabet.indexOf(c);
-          int position = (alphLength - 1) - index;
-          cipher.append(alphabet.charAt(position));
-
-        } else if (d == b) {
-          int index = alphabet.indexOf(c);
-          int position = (alphLength - 1) - index;
-          cipher.append(alphaLower.charAt(position));
-        }
-
-      }
-
-    }
-
-    return cipher;
-
-  }
-
-  public static StringBuilder atbashDeciphering(String encryptedString) {
-
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String alphaLower = "abcdefghijklmnopqrstuvwxyz";
-
-    int strLength = encryptedString.length();
-    int alphLength = alphabet.length();
-    StringBuilder decipher = new StringBuilder("");
-
-    for (int i = 0; i < strLength; i++) {
-      char b = encryptedString.charAt(i);
-      if (b == ' ') {
-        decipher.append(" ");
-      }
-
-      for (int j = 0; j < alphLength; j++) {
-        char c = alphabet.charAt(j);
-        char d = alphaLower.charAt(j);
-
-        if (c == b) {
-          int index = alphabet.indexOf(c);
-          int position = (alphLength - 1) - index;
-          decipher.append(alphabet.charAt(position));
-
-        } else if (d == b) {
-          int index = alphabet.indexOf(c);
-          int position = (alphLength - 1) - index;
-          decipher.append(alphaLower.charAt(position));
-        }
-
-      }
-
-    }
-    return decipher;
-  }
-
 
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
-    switch (cipherType){
+    switch (cipherType) {
       case Atbash:
+        Cipher Atbash = new Atbash();
         lblOutput.setText(Atbash.encrypt(plainString).toString());
       case Caesar:
 
     }
 
-
-    lblOutput.setText(atbashCiphering(plainString).toString());
   }
 
   public void decrypt(MouseEvent mouseEvent) {
-    String encryptedString = messageString.getText();
-    lblOutput.setText(atbashDeciphering(encryptedString).toString());
+    String plainString = messageString.getText();
+    CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+
+    switch (cipherType) {
+      case Atbash:
+        Cipher Atbash = new Atbash();
+        lblOutput.setText(Atbash.decrypt(plainString).toString());
+      case Caesar:
+    }
   }
 }
