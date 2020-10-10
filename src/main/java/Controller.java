@@ -91,10 +91,12 @@ public class Controller {
       case Atbash:
         Cipher Atbash = new Atbash();
         lblOutput.setText(Atbash.encrypt(plainString, 0, null).toString());
+        break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
         lblOutput.setText(Caesar.encrypt(plainString, offset, null).toString());
+        break;
       case Vigenere:
         String key = keyString.getText();
         Cipher Vigenere = new Vigenere();
@@ -111,10 +113,12 @@ public class Controller {
       case Atbash:
         Cipher Atbash = new Atbash();
         lblOutput.setText(Atbash.decrypt(messString, 0, null).toString());
+        break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
         lblOutput.setText(Caesar.decrypt(messString, offset, null).toString());
+        break;
       case Vigenere:
         String key = keyString.getText();
         Cipher Vigenere = new Vigenere();
