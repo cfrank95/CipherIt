@@ -1,0 +1,15 @@
+
+#AnchorPane {
+  background-color: white;
+}
+
+.root {
+  -fx-font-family: "Sitka Subheading";
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+}
+
+.button {
+  -fx-background-color: orangered;
+  -fx-text-fill: white;
+}
