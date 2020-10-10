@@ -11,14 +11,16 @@ import javafx.scene.input.MouseEvent;
 public class Controller {
 
   static Scanner keyboard = new Scanner(System.in);
+
+
+
+  @FXML
   public TextField messageString;
   public ChoiceBox choiceBox;
   public ChoiceBox offsetChoice;
   public TextField keyString;
   public Label offsetLbl;
   public Label keyPhraseLabel;
-
-
   @FXML
   private TextField lblOutput;
 
@@ -101,6 +103,7 @@ public class Controller {
         String key = keyString.getText();
         Cipher Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.encrypt(plainString, 0, key).toString());
+        break;
     }
 
   }
