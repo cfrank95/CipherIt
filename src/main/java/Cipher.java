@@ -1,12 +1,12 @@
 public abstract class Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString, int offset) {
+  public StringBuilder encrypt(String plainString, int offset) {
     return null;
   }
 
   @Override
-  public  StringBuilder decrypt(String encryptedString) {
+  public StringBuilder decrypt(String encryptedString, int offset) {
     return null;
   }
 }
@@ -14,7 +14,7 @@ public abstract class Cipher implements CipherControl {
 class Atbash extends Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString, int offset) {
+  public StringBuilder encrypt(String plainString, int offset) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -53,7 +53,7 @@ class Atbash extends Cipher implements CipherControl {
   }
 
   @Override
-  public StringBuilder decrypt(String encryptedString) {
+  public StringBuilder decrypt(String encryptedString, int offset) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -95,24 +95,37 @@ class Atbash extends Cipher implements CipherControl {
 class Caesar extends Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString, int offset) {
+  public StringBuilder encrypt(String plainString, int offset) {
     // StringBuilder to hold encrypted String
     StringBuilder encryptedString = new StringBuilder();
 
-    // User inputs String to be encrypted and integer to offset characters
-
-
-    System.out.println("Enter offset: ");
-
     // loop adding each ASCII character by the offset provided
-    for(int i = 0; i < plainString.length(); i++){
+    for (int i = 0; i < plainString.length(); i++) {
       char letter = plainString.charAt(i);
       int letterInt = letter + offset;
 
-      encryptedString.append((char)letterInt);
+      encryptedString.append((char) letterInt);
     }
 
     return encryptedString;
+  }
+
+  @Override
+  public StringBuilder decrypt(String encryptedString, int offset) {
+
+    // StringBuilder to hold encrypted String
+    StringBuilder decryptedString = new StringBuilder();
+
+    // loop adding each ASCII character by the offset provided
+    for (int i = 0; i < encryptedString.length(); i++) {
+      char letter = encryptedString.charAt(i);
+      int letterInt = letter - offset;
+
+      decryptedString.append((char) letterInt);
+    }
+
+    return decryptedString;
+
   }
 }
 

@@ -40,7 +40,7 @@ public class Controller {
    * populates choice box on Product Line tab
    */
   public void offsetSelect() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 1; i <= 5; i++) {
       offsetChoice.getItems().add(i);
     }
 
@@ -57,25 +57,26 @@ public class Controller {
         Cipher Atbash = new Atbash();
         lblOutput.setText(Atbash.encrypt(plainString, 0).toString());
       case Caesar:
+        int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
-        lblOutput.setText(Caesar.encrypt(plainString, 0).toString());
+        lblOutput.setText(Caesar.encrypt(plainString, offset).toString());
 
     }
 
   }
 
   public void decrypt(MouseEvent mouseEvent) {
-    String plainString = messageString.getText();
+    String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
     switch (cipherType) {
       case Atbash:
         Cipher Atbash = new Atbash();
-        lblOutput.setText(Atbash.decrypt(plainString).toString());
+        lblOutput.setText(Atbash.decrypt(messString, 0).toString());
       case Caesar:
         int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
-        lblOutput.setText(Caesar.decrypt(plainString).toString());
+        lblOutput.setText(Caesar.decrypt(messString, offset).toString());
     }
   }
 }
