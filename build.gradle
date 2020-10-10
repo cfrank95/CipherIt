@@ -24,7 +24,7 @@ javafx {
 mainClassName = 'Main'
 
 
-group 'io.github.ampaul5653'
+group 'io.github.Yewklid'
 
 version '1.0'
 
