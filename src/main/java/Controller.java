@@ -14,7 +14,7 @@ public class Controller {
 
   @FXML
 
-  private Label lblOutput;
+  private TextField lblOutput;
 
 
   public void sayHello() {
