@@ -16,6 +16,7 @@ public class Controller {
   public ChoiceBox offsetChoice;
   public TextField keyString;
   public Label offsetLbl;
+  public Label keyPhraseLabel;
 
 
   @FXML
@@ -53,13 +54,31 @@ public class Controller {
   public void offsetToggle() {
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
-    if ((cipherType == CipherType.Caesar) || (cipherType == CipherType.Vigenere)) {
+    if (cipherType == CipherType.Caesar) {
+
       offsetChoice.setVisible(true);
       offsetSelect();
-      offsetLbl.setText("Offset");
+      offsetLbl.setText("Offset: ");
+
+      keyString.setVisible(false);
+      keyPhraseLabel.setText("");
+
+
+    } else if (cipherType == CipherType.Vigenere) {
+      keyPhraseLabel.setText("Key Phrase: ");
+      keyString.setVisible(true);
+
+      offsetChoice.setVisible(false);
+      offsetLbl.setText("");
+
     } else {
       offsetChoice.setVisible(false);
       offsetLbl.setText("");
+
+      keyPhraseLabel.setText(" ");
+      keyString.setVisible(false);
+      keyPhraseLabel.setText("");
+
     }
   }
 
@@ -105,8 +124,6 @@ public class Controller {
 
 
   public void typeSelect(javafx.event.ActionEvent actionEvent) {
-
     offsetToggle();
-
   }
 }
