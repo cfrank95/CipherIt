@@ -62,22 +62,19 @@ public class Controller {
 
   }
 
-  public static void atbashDeciphering() {
-
-    System.out.print("Enter encrypted message: ");
-    String cryptedString = keyboard.nextLine();
+  public static StringBuilder atbashDeciphering(String encryptedString) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
 
-    int strLength = cryptedString.length();
+    int strLength = encryptedString.length();
     int alphLength = alphabet.length();
-    StringBuilder cipher = new StringBuilder("");
+    StringBuilder decipher = new StringBuilder("");
 
     for (int i = 0; i < strLength; i++) {
-      char b = cryptedString.charAt(i);
+      char b = encryptedString.charAt(i);
       if (b == ' ') {
-        cipher.append(" ");
+        decipher.append(" ");
       }
 
       for (int j = 0; j < alphLength; j++) {
@@ -87,26 +84,30 @@ public class Controller {
         if (c == b) {
           int index = alphabet.indexOf(c);
           int position = (alphLength - 1) - index;
-          cipher.append(alphabet.charAt(position));
+          decipher.append(alphabet.charAt(position));
 
         } else if (d == b) {
           int index = alphabet.indexOf(c);
           int position = (alphLength - 1) - index;
-          cipher.append(alphaLower.charAt(position));
+          decipher.append(alphaLower.charAt(position));
         }
 
       }
 
     }
-    System.out.println(cipher);
+    return decipher;
 
   }
 
 
   public void encrypt(MouseEvent mouseEvent) {
-    String plainString = keyboard.nextLine();
+    String plainString = messageString.getText();
     lblOutput.setText(atbashCiphering(plainString).toString());
 
+  }
 
+  public void decrypt(MouseEvent mouseEvent) {
+    String encryptedString = messageString.getText();
+    lblOutput.setText(atbashDeciphering(encryptedString).toString());
   }
 }
