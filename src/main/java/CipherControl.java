@@ -1,6 +1,6 @@
 public interface CipherControl {
 
-  public StringBuilder encrypt(String plainString);
-  public StringBuilder decrypt(String encryptedString);
+  StringBuilder encrypt(String plainString, int offset, String key);
+  StringBuilder decrypt(String encryptedString, int offset, String key);
 
 }
