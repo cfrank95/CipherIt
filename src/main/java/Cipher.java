@@ -1,3 +1,4 @@
+
 public abstract class Cipher implements CipherControl {
 
   @Override
@@ -96,17 +97,22 @@ class Caesar extends Cipher implements CipherControl {
 
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
-    // StringBuilder to hold encrypted String
     StringBuilder encryptedString = new StringBuilder();
 
-    // loop adding each ASCII character by the offset provided
     for (int i = 0; i < plainString.length(); i++) {
-      char letter = plainString.charAt(i);
-      int letterInt = letter + offset;
+      if (Character.isUpperCase(plainString.charAt(i))) {
+        char ch = (char) (((int) plainString.charAt(i) +
+            offset - 65) % 26 + 65);
+        encryptedString.append(ch);
+      } else if (plainString.charAt(i) == ' ') {
+        encryptedString.append(" ");
 
-      encryptedString.append((char) letterInt);
+      } else {
+        char ch = (char) (((int) plainString.charAt(i) +
+            offset - 97) % 26 + 97);
+        encryptedString.append(ch);
+      }
     }
-
     return encryptedString;
   }
 
@@ -119,6 +125,10 @@ class Caesar extends Cipher implements CipherControl {
     // loop adding each ASCII character by the offset provided
     for (int i = 0; i < encryptedString.length(); i++) {
       char letter = encryptedString.charAt(i);
+      if (encryptedString.charAt(i) == ' ') {
+        decryptedString.append(" ");
+
+      }
       int letterInt = letter - offset;
 
       decryptedString.append((char) letterInt);
