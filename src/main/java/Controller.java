@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -21,6 +22,7 @@ public class Controller {
   public TextField keyString;
   public Label offsetLbl;
   public Label keyPhraseLabel;
+  public TextArea textLog;       //Use to submit a log to textbox
   @FXML
   private TextField lblOutput;
 
@@ -28,6 +30,14 @@ public class Controller {
   public void initialize() {
     choiceBoxSelect();
 
+  }
+
+  public TextArea getTextLog() {
+    return textLog;
+  }
+
+  public void setTextLog(String message) {
+    this.textLog.setText(textLog.getText() + "\n" + message);
   }
 
   /**

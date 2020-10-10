@@ -96,7 +96,7 @@
                     <TextField fx:id="keyString" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
                 </GridPane>
-                        <TextArea editable="false" layoutX="120.0" layoutY="363.0" prefHeight="155.0" prefWidth="455.0" text="test" />
+                        <TextArea fx:id="textLog" editable="false" layoutX="120.0" layoutY="363.0" prefHeight="155.0" prefWidth="455.0" text="Log..." />
               </children>
             </AnchorPane>
           </content>
