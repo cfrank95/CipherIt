@@ -53,7 +53,7 @@
           </GridPane.margin>
         </Label>
         <TextField fx:id="messageString" prefHeight="25.0" prefWidth="196.0" GridPane.columnIndex="1" />
-            <ChoiceBox fx:id="choiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ChoiceBox fx:id="choiceBox" onAction="#typeSelect" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -62,8 +62,8 @@
                </GridPane.margin>
             </ChoiceBox>
             <Label prefHeight="17.0" prefWidth="145.0" text="Cryptography Type:" GridPane.rowIndex="1" />
-            <Label text="Offset:" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="offsetChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="offsetLbl" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="offsetChoice" prefWidth="150.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="40.0" />
                </GridPane.margin>
