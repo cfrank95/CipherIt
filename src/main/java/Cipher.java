@@ -1,41 +1,20 @@
-import java.util.Scanner;
-import javafx.fxml.FXML;
+public abstract class Cipher implements CipherControl {
 
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-
-
-public class Controller extends Cipher{
-
-  static Scanner keyboard = new Scanner(System.in);
-  public TextField messageString;
-  public ChoiceBox choiceBox;
-
-
-  @FXML
-
-  private TextField lblOutput;
-
-
-  public void initialize(){
-    choiceBoxSelect();
+  @Override
+  public static StringBuilder encrypt(String plainString) {
+    return null;
   }
 
-  /**
-   * populates choice box on Product Line tab
-   */
-  public void choiceBoxSelect() {
-
-    for (CipherType type : CipherType.values()) {
-      choiceBox.getItems().add(type);
-    }
-
-
+  @Override
+  public StringBuilder decrypt(String encryptedString) {
+    return null;
   }
+}
 
-  public static StringBuilder atbashCiphering(String plainString) {
+class Atbash extends Cipher implements CipherControl {
+
+  @Override
+  public static StringBuilder encrypt(String plainString) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -73,7 +52,8 @@ public class Controller extends Cipher{
 
   }
 
-  public static StringBuilder atbashDeciphering(String encryptedString) {
+  @Override
+  public StringBuilder decrypt(String encryptedString) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -107,26 +87,6 @@ public class Controller extends Cipher{
 
     }
     return decipher;
-  }
 
-
-  public void encrypt(MouseEvent mouseEvent) {
-    String plainString = messageString.getText();
-    CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
-
-    switch (cipherType){
-      case Atbash:
-        lblOutput.setText(Atbash.encrypt(plainString).toString());
-      case Caesar:
-
-    }
-
-
-    lblOutput.setText(atbashCiphering(plainString).toString());
-  }
-
-  public void decrypt(MouseEvent mouseEvent) {
-    String encryptedString = messageString.getText();
-    lblOutput.setText(atbashDeciphering(encryptedString).toString());
   }
 }

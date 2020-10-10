@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,12 +23,12 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <children>
-        <Button mnemonicParsing="false" onAction="#sayHello" onMouseClicked="#encrypt" prefHeight="25.0" prefWidth="135.0" text="Encrypt">
+        <Button mnemonicParsing="false" onMouseClicked="#encrypt" prefHeight="25.0" prefWidth="135.0" text="Encrypt">
           <GridPane.margin>
             <Insets left="20.0" />
           </GridPane.margin>
         </Button>
-        <Button layoutX="30.0" layoutY="102.0" mnemonicParsing="false" onAction="#sayHello" onMouseClicked="#decrypt" prefHeight="25.0" prefWidth="135.0" text="Decrypt" GridPane.columnIndex="1">
+        <Button layoutX="30.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#decrypt" prefHeight="25.0" prefWidth="135.0" text="Decrypt" GridPane.columnIndex="1">
           <GridPane.margin>
             <Insets left="20.0" />
           </GridPane.margin>
@@ -36,8 +37,8 @@
     </GridPane>
     <GridPane layoutX="92.0" layoutY="30.0" prefHeight="165.0" prefWidth="360.0">
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="120.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="145.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="215.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,6 +52,15 @@
           </GridPane.margin>
         </Label>
         <TextField fx:id="messageString" prefHeight="25.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="choiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <Label prefHeight="17.0" prefWidth="145.0" text="Cryptography Type" GridPane.rowIndex="2" />
       </children>
     </GridPane>
       <GridPane layoutX="95.0" layoutY="289.0" prefHeight="99.0" prefWidth="411.0">
