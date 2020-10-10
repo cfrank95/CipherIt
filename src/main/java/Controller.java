@@ -13,6 +13,7 @@ public class Controller {
   public TextField messageString;
   public ChoiceBox choiceBox;
   public ChoiceBox offsetChoice;
+  public TextField keyString;
 
 
   @FXML
@@ -55,12 +56,15 @@ public class Controller {
     switch (cipherType) {
       case Atbash:
         Cipher Atbash = new Atbash();
-        lblOutput.setText(Atbash.encrypt(plainString, 0).toString());
+        lblOutput.setText(Atbash.encrypt(plainString, 0, null).toString());
       case Caesar:
         int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
-        lblOutput.setText(Caesar.encrypt(plainString, offset).toString());
-
+        lblOutput.setText(Caesar.encrypt(plainString, offset, null).toString());
+      case Vigenere:
+        String key = keyString.getText();
+        Cipher Vigenere = new Vigenere();
+        lblOutput.setText(Vigenere.encrypt(plainString, 0, key).toString());
     }
 
   }
@@ -72,11 +76,15 @@ public class Controller {
     switch (cipherType) {
       case Atbash:
         Cipher Atbash = new Atbash();
-        lblOutput.setText(Atbash.decrypt(messString, 0).toString());
+        lblOutput.setText(Atbash.decrypt(messString, 0, null).toString());
       case Caesar:
         int offset = (int) offsetChoice.getValue();
         Cipher Caesar = new Caesar();
-        lblOutput.setText(Caesar.decrypt(messString, offset).toString());
+        lblOutput.setText(Caesar.decrypt(messString, offset, null).toString());
+      case Vigenere:
+        String key = keyString.getText();
+        Cipher Vigenere = new Vigenere();
+        lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
     }
   }
 }
