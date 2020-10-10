@@ -1,15 +1,16 @@
-
-#AnchorPane {
-  background-color: white;
-}
-
 .root {
-  -fx-font-family: "Sitka Subheading";
+  -fx-font-family: "arial";
   -fx-text-fill: white;
   -fx-font-size: 16px;
+  -fx-background-color: #e5e6e8;
 }
 
 .button {
-  -fx-background-color: orangered;
+  -fx-background-color: #727d89;
   -fx-text-fill: white;
+}
+
+.tab-pane {
+  -fx-border-color: #727d89;
+  -fx-border-width: 5px;
 }

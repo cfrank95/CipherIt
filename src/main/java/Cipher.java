@@ -1,6 +1,7 @@
 
 public abstract class Cipher implements CipherControl {
 
+
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
     return null;
@@ -149,7 +150,7 @@ class Vigenere extends Cipher implements CipherControl {
     int passIndex = -1;                    //Pass array value
     int divisibility = 1;                 //How many times the alphabet repeats
 
-    //System.out.println("Encryption length = " + phraseEncrypter.length());
+    //log.setTextLog("Encryption length = " + key.length());
 
     for (int i = 0; i < phrase.length(); i++) {
       char tempChar = (char) (phrase.charAt(i) - 96);   //phrase index character
@@ -176,8 +177,7 @@ class Vigenere extends Cipher implements CipherControl {
             > 25) {                              //If phrase char and encryption char are over alphabet length,
           divisibility = ((tempChar + passChar)
               / 26);                  //How many times does the alphabet repeats
-          System.out.println(
-              divisibility + " = divisible");              //How many times the alphabet is repeated
+          System.out.println(divisibility + " = divisible");              //How many times the alphabet is repeated
           newChar = (char) Math.abs((tempChar + passChar) - (25 * divisibility)
               + 96);     //(Phrase char + encryption char) - (alphabet * alphabet iterations)
         } else {                                                         //Else if phrase is within alphabet range,
