@@ -1,3 +1,4 @@
+import java.awt.event.ActionEvent;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 
@@ -14,6 +15,7 @@ public class Controller {
   public ChoiceBox choiceBox;
   public ChoiceBox offsetChoice;
   public TextField keyString;
+  public Label offsetLbl;
 
 
   @FXML
@@ -22,7 +24,7 @@ public class Controller {
 
   public void initialize() {
     choiceBoxSelect();
-    offsetSelect();
+
   }
 
   /**
@@ -32,6 +34,7 @@ public class Controller {
 
     for (CipherType type : CipherType.values()) {
       choiceBox.getItems().add(type);
+      choiceBox.getSelectionModel().selectFirst();
     }
 
 
@@ -43,9 +46,21 @@ public class Controller {
   public void offsetSelect() {
     for (int i = 1; i <= 5; i++) {
       offsetChoice.getItems().add(i);
+      offsetChoice.getSelectionModel().selectFirst();
     }
+  }
 
+  public void offsetToggle() {
+    CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
+    if ((cipherType == CipherType.Caesar) || (cipherType == CipherType.Vigenere)) {
+      offsetChoice.setVisible(true);
+      offsetSelect();
+      offsetLbl.setText("Offset");
+    } else {
+      offsetChoice.setVisible(false);
+      offsetLbl.setText("");
+    }
   }
 
 
@@ -86,5 +101,12 @@ public class Controller {
         Cipher Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
     }
+  }
+
+
+  public void typeSelect(javafx.event.ActionEvent actionEvent) {
+
+    offsetToggle();
+
   }
 }
