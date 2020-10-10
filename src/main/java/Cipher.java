@@ -1,12 +1,12 @@
 public abstract class Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString) {
+  public StringBuilder encrypt(String plainString) {
     return null;
   }
 
   @Override
-  public  StringBuilder decrypt(String encryptedString) {
+  public StringBuilder decrypt(String encryptedString) {
     return null;
   }
 }
@@ -14,7 +14,7 @@ public abstract class Cipher implements CipherControl {
 class Atbash extends Cipher implements CipherControl {
 
   @Override
-  public  StringBuilder encrypt(String plainString) {
+  public StringBuilder encrypt(String plainString) {
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String alphaLower = "abcdefghijklmnopqrstuvwxyz";
@@ -89,5 +89,4 @@ class Atbash extends Cipher implements CipherControl {
     return decipher;
 
   }
-
 }
