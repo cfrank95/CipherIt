@@ -42,6 +42,7 @@ public class Controller {
   public Label keyPhraseLabel;
   public ImageView imageDisplay;
   public AnchorPane anchorPane;
+  public TextArea textLog;
   @FXML
   private TextField lblOutput;
 
@@ -115,6 +116,8 @@ public class Controller {
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+    CipherLog recordLog = new CipherLog(plainString, cipherType.toString());
+    textLog.setText(recordLog.toString());
 
     switch (cipherType) {
       case Atbash:
@@ -146,6 +149,8 @@ public class Controller {
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+    CipherLog recordLog = new CipherLog(messString, cipherType.toString());
+    textLog.setText(recordLog.toString());
 
     switch (cipherType) {
       case Atbash:
