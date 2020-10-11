@@ -43,11 +43,11 @@ public class ImageCipher extends Application{
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
 
-        int numLocations = 20;
+        int numLocations = 3;
         int numCells = (int) Math.pow(numLocations, 2);
         int[] cells;
 
-        int offset = 15;
+        int offset = 2;
 
         // Initialization of variables for image characteristics
         int width = (int) originalImage.getWidth();
@@ -57,29 +57,30 @@ public class ImageCipher extends Application{
 
         cells = new int[numCells];
         int[] encryptCells = new int[numCells];
-        for(int i = 0; i < numCells; i++){
+        for(int i = 0; i < numCells; i++) {
             cells[i] = i;
-            if(i + offset < numCells)
-                encryptCells[i] = i + offset;
-            else
-                encryptCells[i] = (numCells - i);
-            System.out.println(encryptCells[i]);
         }
 
-        // Cypher
-//        int rowIndex;
-//        for(int i = 0; i < numCells; i++){
-//            if (i != numCells - 1)
-//                rowIndex = i++;
-//            else
-//                rowIndex = 0;
-//
-//            int temp = cells[i];
-//            cells[i] = cells[rowIndex];
-//            cells[rowIndex] = temp;
-//            System.out.println(cells[i]);
-//        }
+        int count = offset;
+        int elem = 0;
+        for(int i = 1; i <= numLocations; i++){
+            int test;
+            int delta;
 
+            for(int j = 1; j <= numLocations; j++){
+                test = count;
+                if(test >= numCells) {
+                    delta = test - numCells;
+                    count = delta;
+                    encryptCells[elem] = count;
+                }else
+                    encryptCells[elem] = test;
+                if(j != 3)
+                    count += numLocations;
+                elem++;
+            }
+            count++;
+        }
 
 
         // Create a writable image
@@ -115,20 +116,14 @@ public class ImageCipher extends Application{
                             // Retrieving the color of the pixel of the loaded image
                             Color color = pixelReader.getColor(readX, readY);
                             readX++;
-
-                            // Write color to wImage
-//                            writeX = ((encryptCells[totalElm - 1]) % numLocations) * copyWidth + x;
-//                            writeY = (encryptCells[totalElm - 1] / numLocations) * copyHeight + y;
-                            writeX = ((encryptCells[xElm] % numLocations) * copyWidth + x);
-                            writeY = ((encryptCells[yElm] % numLocations) * copyHeight + y);
+                            writeX = (((encryptCells[xElm]) / numLocations) * copyWidth + x);
+                            writeY = (((encryptCells[yElm]) / numLocations) * copyHeight + y);
                             writer.setColor(writeX, writeY, color);
-                            // System.out.println("Write X: " + writeX + " , Write Y: " + writeY);
                         }
                         readY++;
                     }
                     xElm++;
                     totalElm++;
-                    System.out.println(totalElm);
                 }
                 yElm++;
             }
@@ -156,33 +151,4 @@ public class ImageCipher extends Application{
         // Displaying contents of the stage
         cipherStage.show();
     }
-
-
-
 }
-
-//class Divisions extends ImageCipher{
-//    int startX, startY, endX, endY;
-//
-//    public void setStartX() {
-//        this.startX = startX;
-//    }
-//    public void setStartY() {
-//        this.startY = startY;
-//    }
-//    public void setEndX() {
-//        this.endX = endX;
-//    }
-//    public void setEndY() {
-//        this.endY = endY;
-//    }
-//
-//    Divisions(int sX, int sY, int eX, int eY){
-//        startX = sX;
-//        startY = sY;
-//        endX = eX;
-//        endY = eY;
-//
-//    }
-//
-//}
