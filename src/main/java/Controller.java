@@ -1,3 +1,10 @@
+/*---------------------------------------------------------
+ file: Controller.java
+   by: Adam Paul, Jaden Williams,
+       Christopher Frank, Joseph Morelli
+  for: Controller class for all GUI interactions
+ ---------------------------------------------------------*/
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,12 +28,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
+/**
+ * Controller class for user interactions with the GUI
+ */
 public class Controller {
-
-  static Scanner keyboard = new Scanner(System.in);
-
-
 
   @FXML
   public TextField messageString;
@@ -47,7 +52,7 @@ public class Controller {
   }
 
   /**
-   * populates choice box on Product Line tab
+   * Populates choice box on Product Line tab
    */
   public void choiceBoxSelect() {
 
@@ -55,12 +60,10 @@ public class Controller {
       choiceBox.getItems().add(type);
       choiceBox.getSelectionModel().selectFirst();
     }
-
-
   }
 
   /**
-   * populates choice box on Product Line tab
+   * Populates choice box on Product Line tab
    */
   public void offsetSelect() {
     for (int i = 1; i <= 5; i++) {
@@ -69,6 +72,9 @@ public class Controller {
     }
   }
 
+  /**
+   * Toggles off irrelevant UI elements based off of the selected CipherType
+   */
   public void offsetToggle() {
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
@@ -100,98 +106,131 @@ public class Controller {
     }
   }
 
-
+  /**
+   * Determines what type of encryption will be used based off of the CipherType selected by the
+   * Cipher Type ChoiceBox.
+   *
+   * @param mouseEvent - occurs when mouse clicks the encrypt button
+   */
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
     switch (cipherType) {
       case Atbash:
-        Cipher Atbash = new Atbash();
+        Ciphers Atbash = new Atbash();
         lblOutput.setText(Atbash.encrypt(plainString, 0, null).toString());
         break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
-        Cipher Caesar = new Caesar();
+        Ciphers Caesar = new Caesar();
         lblOutput.setText(Caesar.encrypt(plainString, offset, null).toString());
         break;
       case Vigenere:
         String key = keyString.getText();
-        Cipher Vigenere = new Vigenere();
+        Ciphers Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.encrypt(plainString, 0, key).toString());
         break;
       case Numeric:
-        Cipher Numeric = new Numeric();
-        lblOutput.setText(Numeric.encrypt(plainString,0,null).toString());
+        Ciphers Numeric = new Numeric();
+        lblOutput.setText(Numeric.encrypt(plainString, 0, null).toString());
     }
 
   }
 
+  /**
+   * Determines what type of decryption will be used based off of the CipherType selected by the
+   * Cipher Type ChoiceBox.
+   *
+   * @param mouseEvent - occurs when mouse clicks the decrypt button
+   */
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
     switch (cipherType) {
       case Atbash:
-        Cipher Atbash = new Atbash();
+        Ciphers Atbash = new Atbash();
         lblOutput.setText(Atbash.decrypt(messString, 0, null).toString());
         break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
-        Cipher Caesar = new Caesar();
+        Ciphers Caesar = new Caesar();
         lblOutput.setText(Caesar.decrypt(messString, offset, null).toString());
         break;
       case Vigenere:
         String key = keyString.getText();
-        Cipher Vigenere = new Vigenere();
+        Ciphers Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
       case Numeric:
-        Cipher Numeric = new Numeric();
-        lblOutput.setText(Numeric.decrypt(messString,0,null).toString());
+        Ciphers Numeric = new Numeric();
+        lblOutput.setText(Numeric.decrypt(messString, 0, null).toString());
     }
   }
 
-
-  public void typeSelect(javafx.event.ActionEvent actionEvent) {
+  /**
+   * Calls offsetToggle function when a cipher type is selected
+   *
+   * @param actionEvent - occurs when mouse clicks on a cipher type
+   */
+  public void typeSelect(ActionEvent actionEvent) {
     offsetToggle();
   }
 
-
-
+  /**
+   * Links to Adam's Linkedin when clicked.
+   *
+   * @param event - Opens link when it's clicked on
+   */
   @FXML
   void adamLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("https://www.linkedin.com/in/adam-paul-0450561b9/");
+      URI uri = new URI("https://www.linkedin.com/in/adam-paul-0450561b9/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * Links to Chris' Linkedin when clicked.
+   *
+   * @param event - Opens link when it's clicked on
+   */
   @FXML
   void chrisLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("https://www.linkedin.com/in/cfrank95/");
+      URI uri = new URI("https://www.linkedin.com/in/cfrank95/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * Links to Jaden's Linkedin when clicked.
+   *
+   * @param event - Opens link when it's clicked on
+   */
   @FXML
   void jadenLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("https://www.linkedin.com/in/jaden-williams/");
+      URI uri = new URI("https://www.linkedin.com/in/jaden-williams/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * Links to Joe's Linkedin when clicked.
+   *
+   * @param event - Opens link when it's clicked on
+   */
   @FXML
   void joeLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("https://www.linkedin.com/in/morelli-j91/");
+      URI uri = new URI("https://www.linkedin.com/in/morelli-j91/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
@@ -199,22 +238,23 @@ public class Controller {
   }
 
   ImageCipher imageCipher = new ImageCipher();
+
   public void uploadImage(MouseEvent mouseEvent) throws IOException {
-     FileChooser fileChooser = new FileChooser();
-     fileChooser.setTitle("Open Image File");
-     Stage stage = (Stage) anchorPane.getScene().getWindow();
-     File file = fileChooser.showOpenDialog(stage);
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Image File");
+    Stage stage = (Stage) anchorPane.getScene().getWindow();
+    File file = fileChooser.showOpenDialog(stage);
 
-      if (file != null) { // only proceed, if file was chosen
-        Image img = new Image(file.toURI().toString());
-        imageDisplay.setImage(img);
-        imageCipher.setOriginalImage(img);
-      }
+    if (file != null) { // only proceed, if file was chosen
+      Image img = new Image(file.toURI().toString());
+      imageDisplay.setImage(img);
+      imageCipher.setOriginalImage(img);
     }
+  }
 
-  public void encryptImage(MouseEvent mouseEvent) throws FileNotFoundException, InterruptedException {
+  public void encryptImage(MouseEvent mouseEvent)
+      throws FileNotFoundException, InterruptedException {
     // imageDisplay.imageProperty().setValue(null);
-
 
     Stage stage = new Stage();
     if (imageCipher.getOriginalImage() != null) { // only proceed, if file was chosen
