@@ -152,7 +152,7 @@ public class Controller {
     CipherLog recordLog = new CipherLog(messString, cipherType.toString());
     textLog.setText(recordLog.toString());
 
-    switch (cipherType) {
+    switch (cipherType) { //
       case Atbash:
         Ciphers Atbash = new Atbash();
         lblOutput.setText(Atbash.decrypt(messString, 0, null).toString());
