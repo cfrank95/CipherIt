@@ -5,7 +5,9 @@ import java.net.URI;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -208,6 +210,17 @@ public class Controller {
         Image img = new Image(file.toURI().toString());
         imageDisplay = new ImageView(img);
         root.setCenter(imageDisplay); // add ImageView to scene
+        imageDisplay.setFitHeight(455);
+        imageDisplay.setFitWidth(500);
+        imageDisplay.setX(50);
+        imageDisplay.setY(25);
+        imageDisplay.setPreserveRatio(true);
+        Group toot = new Group(imageDisplay);
+        Scene scene = new Scene(toot, 600, 500);
+        stage.setTitle("Loading an image");
+        stage.setScene(scene);
+        stage.show();
+
       }
 
     }
