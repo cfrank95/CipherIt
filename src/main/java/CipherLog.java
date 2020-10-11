@@ -93,6 +93,4 @@ public class CipherLog {
   public void setCipherType(String cipherType) {
     this.cipherType = cipherType;
   }
-
-
 }
