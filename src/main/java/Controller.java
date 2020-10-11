@@ -1,11 +1,25 @@
-import java.util.Scanner;
 import javafx.fxml.FXML;
-
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.EventHandler;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Controller {
@@ -22,8 +36,9 @@ public class Controller {
   public Label offsetLbl;
   public Label keyPhraseLabel;
   @FXML
-  private TextField lblOutput;
-
+  public TextField lblOutput;
+  @FXML
+  public Button btnOpenFile;
 
   public void initialize() {
     choiceBoxSelect();
@@ -31,7 +46,7 @@ public class Controller {
   }
 
   /**
-   * populates choice box on Product Line tab
+   * populates choice box on Cryptography tab
    */
   public void choiceBoxSelect() {
 
@@ -44,7 +59,7 @@ public class Controller {
   }
 
   /**
-   * populates choice box on Product Line tab
+   * populates offset choice box on Cryptography tab
    */
   public void offsetSelect() {
     for (int i = 1; i <= 5; i++) {
@@ -52,6 +67,7 @@ public class Controller {
       offsetChoice.getSelectionModel().selectFirst();
     }
   }
+
 
   public void offsetToggle() {
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
@@ -111,6 +127,7 @@ public class Controller {
 
   }
 
+
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
@@ -139,4 +156,42 @@ public class Controller {
   public void typeSelect(javafx.event.ActionEvent actionEvent) {
     offsetToggle();
   }
+
+
+  /* ---------------------------------------------
+  *  FILE CHOOSER FOR IMAGE CYPHER
+  */
+  private Desktop desktop = Desktop.getDesktop();
+
+  private void openFile(File file) {
+    try {
+      desktop.open(file);
+    } catch (IOException ex) {
+      Logger.getLogger(
+              FileChooser.class.getName()).log(
+              Level.SEVERE, null, ex
+      );
+    }
+  }
+
+  public void start(final Stage stage){
+    stage.setTitle("File Chooser");
+
+    final FileChooser fileChooser = new FileChooser();
+
+    final GridPane inputGridPane = new GridPane();
+
+    GridPane.setConstraints(btnOpenFile, 0, 0);
+    inputGridPane.setHgap(6);
+    inputGridPane.setVgap(6);
+    inputGridPane.getChildren().addAll(btnOpenFile);
+
+    final Pane rootGroup = new VBox(12);
+    rootGroup.getChildren().addAll(inputGridPane);
+    rootGroup.setPadding(new Insets(12, 12, 12, 12));
+
+    stage.setScene(new Scene(rootGroup));
+    stage.show();
+  }
+
 }
