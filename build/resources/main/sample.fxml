@@ -121,7 +121,8 @@
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="503.0" prefWidth="650.0">
                            <children>
-                              <Button fx:id="btnOpenFile" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#openImage" text="Button" />
+                              <Button fx:id="btnOpenFile" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#openImage" text="Upload Image" />
+                              <ImageView fx:id="imageDisplay" fitHeight="369.0" fitWidth="557.0" layoutX="47.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>

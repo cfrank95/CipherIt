@@ -5,8 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,7 +23,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.scene.image.Image;
 
 public class Controller {
 
@@ -41,6 +43,7 @@ public class Controller {
   @FXML
   public Button btnOpenFile;
   public AnchorPane anchorPane;
+  public ImageView imageDisplay;
 
   public void initialize() {
     choiceBoxSelect();
@@ -166,11 +169,16 @@ public class Controller {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Image File");
     Stage stage = (Stage) anchorPane.getScene().getWindow();
+    final BorderPane root = new BorderPane();
+
 
     File image = fileChooser.showOpenDialog(stage);
+
+
     if (image != null){
-      Desktop desktop = Desktop.getDesktop();
-      desktop.open(image);
+      Image img = new Image(image.toURI().toString());
+      ImageView mv = new ImageView(img);
+      root.setCenter(mv); // add ImageView to scene
     }
 
   }
