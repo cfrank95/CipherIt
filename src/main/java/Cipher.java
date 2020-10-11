@@ -259,5 +259,54 @@ class Vigenere extends Cipher implements CipherControl {
 
 }
 
+class Numeric extends Cipher implements CipherControl {
+
+  @Override
+  public StringBuilder encrypt(String encryption, int offset, String key){
+    String tempInt = "";
+    StringBuilder result = new StringBuilder();
+
+    for(int i = 0; i < encryption.length(); i++) {
+      if (encryption.charAt(i) != ' ') {
+        tempInt = String.valueOf((int) encryption.charAt(i) - 96);
+        if (i == 0)
+          result.append("" + (tempInt));
+        else
+          result.append(" " + (tempInt));
+      }
+    }
+
+    return result;
+  }
+
+  @Override
+  public StringBuilder decrypt(String encryption, int offset, String key) {
+    String tempLetter = " ";
+    int stringConverter = 0;
+    StringBuilder result = new StringBuilder();
+
+    for(int i = 0; i < encryption.length(); i++) {
+      if (encryption.charAt(i) != ' ') {
+        if(encryption.charAt(i) != ' ' &&  i < encryption.length() - 1 && encryption.charAt(i+1) != ' ') {
+          stringConverter = (Integer.parseInt(String.valueOf(encryption.charAt((i)))) * 10) + Integer.parseInt(String.valueOf(encryption.charAt((i + 1))));
+          System.out.println("Interger = " + stringConverter);
+          tempLetter = "" + (char)(stringConverter + 96);
+          i++;
+        }
+        else {
+          char tempChar = (char)(encryption.charAt(i) + 48);
+          tempLetter = "" + tempChar;
+        }
+
+        if (i == 0)
+          result.append("" + (tempLetter));
+        else
+          result.append("" + (tempLetter));
+      }
+    }
+    return result;
+  }
+}
+
 
 

@@ -1,5 +1,6 @@
 public enum CipherType {
   Atbash,
   Caesar,
-  Vigenere;
+  Vigenere,
+  Numeric;
 }

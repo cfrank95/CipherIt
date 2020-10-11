@@ -104,6 +104,9 @@ public class Controller {
         Cipher Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.encrypt(plainString, 0, key).toString());
         break;
+      case Numeric:
+        Cipher Numeric = new Numeric();
+        lblOutput.setText(Numeric.encrypt(plainString, 0, null).toString());
     }
 
   }
@@ -126,6 +129,9 @@ public class Controller {
         String key = keyString.getText();
         Cipher Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
+      case Numeric:
+        Cipher Numeric = new Numeric();
+        lblOutput.setText(Numeric.decrypt(messString, 0, null).toString());
     }
   }
 
