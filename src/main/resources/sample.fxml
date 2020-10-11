@@ -26,7 +26,12 @@
           <content>
             <AnchorPane prefHeight="200.0" prefWidth="515.0">
               <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="159.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="https://i.imgur.com/8n4Hw5u.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="128.0" fitWidth="390.0" layoutX="163.0" layoutY="377.0" opacity="0.23" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="https://i.imgur.com/8n4Hw5u.png" />
                            </image>
@@ -43,7 +48,7 @@
                   </rowConstraints>
                   <children>
                     <Label text="Output:" />
-                    <TextField fx:id="lblOutput" prefHeight="25.0" prefWidth="325.0" GridPane.columnIndex="1" />
+                    <TextField fx:id="lblOutput" prefHeight="25.0" prefWidth="325.0" style="-fx-border-color: #9e441a; -fx-border-width: 1;" GridPane.columnIndex="1" />
                   </children>
                 </GridPane>
                 <GridPane layoutX="120.0" layoutY="264.0" prefHeight="30.0" prefWidth="454.0">
@@ -86,8 +91,8 @@
                         <Insets />
                       </GridPane.margin>
                     </Label>
-                    <TextField fx:id="messageString" prefHeight="31.0" prefWidth="287.0" GridPane.columnIndex="1" />
-                    <ChoiceBox fx:id="choiceBox" onAction="#typeSelect" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <TextField fx:id="messageString" prefHeight="31.0" prefWidth="287.0" style="-fx-border-image-width: 10; -fx-border-color: #9e441a;" GridPane.columnIndex="1" />
+                    <ChoiceBox fx:id="choiceBox" onAction="#typeSelect" prefWidth="150.0" style="-fx-border-color: #9e441a; -fx-border-width: 1;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                       <opaqueInsets>
                         <Insets />
                       </opaqueInsets>
@@ -106,13 +111,7 @@
                     <TextField fx:id="keyString" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
                 </GridPane>
-                        <TextArea fx:id="textLog" editable="false" layoutX="119.0" layoutY="363.0" opacity="0.75" prefHeight="155.0" prefWidth="456.0" text="Log..." />
-                        <ImageView fitHeight="128.0" fitWidth="390.0" layoutX="163.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="https://i.imgur.com/8n4Hw5u.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextArea fx:id="textLog" blendMode="DARKEN" editable="false" layoutX="119.0" layoutY="363.0" prefHeight="155.0" prefWidth="456.0" style="-fx-border-width: 1; -fx-border-color: #9e441a;" text="Log..." />
               </children>
             </AnchorPane>
           </content>
@@ -121,10 +120,10 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#uploadImage" text="Upload Image" />
-                        <ImageView fx:id="imageDisplay" fitHeight="364.0" fitWidth="460.0" layoutX="112.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button layoutX="219.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#encryptImage" prefHeight="32.0" prefWidth="122.0" styleClass="redButton" text="Encrypt" />
-                        <Button layoutX="341.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#decryptImage" prefHeight="32.0" prefWidth="124.0" styleClass="redButton" text="Decrypt" />
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#uploadImage" text="Upload Image" />
+                        <ImageView fx:id="imageDisplay" fitHeight="462.0" fitWidth="474.0" layoutX="108.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="359.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#encryptImage" prefHeight="32.0" prefWidth="122.0" styleClass="redButton" text="Encrypt" />
+                        <Button layoutX="497.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#decryptImage" prefHeight="32.0" prefWidth="124.0" styleClass="redButton" text="Decrypt" />
                      </children>
                   </AnchorPane>
                </content></Tab>

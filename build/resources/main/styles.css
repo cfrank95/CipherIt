@@ -10,6 +10,11 @@
   -fx-text-fill: white;
 }
 
+.redButton {
+  -fx-background-color: orangered;
+  -fx-text-fill: white;
+}
+
 .tab-pane {
   -fx-border-color: #727d89;
   -fx-border-width: 5px;
