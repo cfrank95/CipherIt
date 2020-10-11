@@ -172,7 +172,7 @@ class Caesar extends Ciphers implements CipherControl {
    * @param encryptedString - phrase to decrypt
    * @param offset          - specifies how many letters each letter will be offset by
    * @param key             - irrelevant to decryption method
-   * @return the encrypted message
+   * @return the decrypted message
    */
   @Override
   public StringBuilder decrypt(String encryptedString, int offset, String key) {
