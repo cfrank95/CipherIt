@@ -5,16 +5,13 @@
   for: Controller class for all GUI interactions
  ---------------------------------------------------------*/
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Scanner;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -22,9 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -42,13 +37,14 @@ public class Controller {
   public Label keyPhraseLabel;
   public ImageView imageDisplay;
   public AnchorPane anchorPane;
+  public TextArea textLog;
   @FXML
   private TextField lblOutput;
+  ArrayList<String> logs = new ArrayList<>() ;
 
 
   public void initialize() {
     choiceBoxSelect();
-
   }
 
   /**
@@ -116,6 +112,13 @@ public class Controller {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
+    textLog.setText(" ");
+    CipherLog recordLog = new CipherLog(plainString, cipherType.toString());
+    logs.add(recordLog.toString());
+    for(String a : logs){
+      textLog.appendText(a + "\n");
+    }
+
     switch (cipherType) {
       case Atbash:
         Ciphers Atbash = new Atbash();
@@ -146,6 +149,13 @@ public class Controller {
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+
+    textLog.setText(" ");
+    CipherLog recordLog = new CipherLog(messString, cipherType.toString());
+    logs.add(recordLog.toString());
+    for(String a : logs){
+      textLog.appendText(a + "\n");
+    }
 
     switch (cipherType) {
       case Atbash:
