@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,7 @@ public class Controller {
   public TextArea textLog;
   @FXML
   private TextField lblOutput;
+  ArrayList<String> logs = new ArrayList<>() ;
 
 
   public void initialize() {
@@ -116,8 +118,13 @@ public class Controller {
   public void encrypt(MouseEvent mouseEvent) {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+
+    textLog.setText(" ");
     CipherLog recordLog = new CipherLog(plainString, cipherType.toString());
-    textLog.setText(recordLog.toString());
+    logs.add(recordLog.toString());
+    for(String a : logs){
+      textLog.appendText(a + "\n");
+    }
 
     switch (cipherType) {
       case Atbash:
@@ -149,8 +156,10 @@ public class Controller {
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
+
+    textLog.setText(" ");
     CipherLog recordLog = new CipherLog(messString, cipherType.toString());
-    textLog.setText(recordLog.toString());
+    logs.add(recordLog.toString());
 
     switch (cipherType) {
       case Atbash:

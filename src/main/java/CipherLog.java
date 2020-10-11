@@ -13,7 +13,7 @@ public class CipherLog {
   public String toString() {
     String record =
         "Log #: " + logNumber + " --- " + "Message Ciphered: " + message + " --- " + "Cipher Type: "
-            + cipherType + "\n";
+            + cipherType;
     logNumber++;
     return record;
   }
