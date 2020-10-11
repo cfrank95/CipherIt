@@ -56,7 +56,7 @@ class Atbash extends Ciphers implements CipherControl {
 
     for (int i = 0; i < strLength; i++) {
       char b = plainString.charAt(i);
-      if (b == ' ') {
+      if (b == ' ') { // append a space if whitespace is detected
         cipher.append(" ");
       }
 
