@@ -94,6 +94,13 @@ class Atbash extends Cipher implements CipherControl {
 
 }
 
+/**************************************************
+ * Class: Caesar
+ * Implementation:
+ *     Class interacted with through GUI, shifting
+***************************************************/
+
+
 class Caesar extends Cipher implements CipherControl {
 
   @Override
@@ -139,6 +146,8 @@ class Caesar extends Cipher implements CipherControl {
 
   }
 }
+
+
 
 class Vigenere extends Cipher implements CipherControl {
 
