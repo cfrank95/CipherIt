@@ -98,6 +98,7 @@ class Atbash extends Cipher implements CipherControl {
  * Class: Caesar
  * Implementation:
  *     Class interacted with through GUI, shifting
+ *     ACII values, allowing spaces and a-z
 ***************************************************/
 
 
@@ -133,13 +134,20 @@ class Caesar extends Cipher implements CipherControl {
     // loop adding each ASCII character by the offset provided
     for (int i = 0; i < encryptedString.length(); i++) {
       char letter = encryptedString.charAt(i);
-      if (encryptedString.charAt(i) == ' ') {
-        decryptedString.append(" ");
 
-      }
       int letterInt = letter - offset;
 
-      decryptedString.append((char) letterInt);
+      if (letter <= 32) {
+        decryptedString.append(" ");
+      }else if(letterInt < 65 && letterInt > 32) {
+        letterInt = 122 - (64 - letterInt);
+        decryptedString.append((char) letterInt);
+      }else if(letterInt < 97 && letterInt > 90){
+        letterInt = 90 - (96 - letterInt);
+        decryptedString.append((char) letterInt);
+      }else{
+        decryptedString.append((char) letterInt);
+      }
     }
 
     return decryptedString;
