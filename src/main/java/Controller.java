@@ -213,7 +213,8 @@ public class Controller {
     }
 
   public void encryptImage(MouseEvent mouseEvent) throws FileNotFoundException, InterruptedException {
-    imageDisplay.imageProperty().setValue(null);
+    // imageDisplay.imageProperty().setValue(null);
+
 
     Stage stage = new Stage();
     if (imageCipher.getOriginalImage() != null) { // only proceed, if file was chosen

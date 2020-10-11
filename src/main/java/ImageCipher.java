@@ -44,17 +44,19 @@ public class ImageCipher extends Application{
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
         int width = (int) originalImage.getWidth();
-        int height = (int) originalImage.getWidth();
+        int height = (int) originalImage.getHeight();
+
+
 
         // Create a writable image
         WritableImage wImage = new WritableImage(width, height);
+
 
         // Reading color from loaded image
         PixelReader pixelReader = originalImage.getPixelReader();
 
         // Create Pixel Writer Object
         PixelWriter writer = wImage.getPixelWriter();
-        System.out.println("x: " + width + ", y: " + height);
         // Reading color of image
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -67,6 +69,9 @@ public class ImageCipher extends Application{
 
         // Setting the view for the writable image
         ImageView imageView = new ImageView(wImage);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+
 
         // Creating a Group object
         Group root = new Group(imageView);
