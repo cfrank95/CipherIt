@@ -1,3 +1,9 @@
+/*---------------------------------------------------------
+ file: build.gradle
+   by: Adam Paul, Jaden Williams,
+       Christopher Frank, Joseph Morelli
+  for: Gradle build file for project
+  ---------------------------------------------------------*/
 plugins {
 
     id 'java'
