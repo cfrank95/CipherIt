@@ -5,8 +5,6 @@
   for: Class for logging cipher encrypts/decrypts
  ---------------------------------------------------------*/
 
-import javax.crypto.Cipher;
-
 /**
  * Class CipherLog concerns the "Log" TextArea in the cryptography class. This class implements
  * basic functionality for the Log text field.
