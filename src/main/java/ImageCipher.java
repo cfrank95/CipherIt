@@ -6,7 +6,6 @@
        said images' associated properties
  ---------------------------------------------------------*/
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.application.Application;
 
