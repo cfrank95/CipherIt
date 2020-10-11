@@ -208,4 +208,10 @@ public class Controller {
         imageDisplay.setImage(img);
       }
     }
+
+  public void decryptImage(MouseEvent mouseEvent) {
+  }
+
+  public void encryptImage(MouseEvent mouseEvent) {
+  }
 }
