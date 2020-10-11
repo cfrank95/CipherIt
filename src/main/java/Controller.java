@@ -1,29 +1,14 @@
+import java.net.URI;
+import java.util.Scanner;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.beans.EventHandler;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.image.Image;
 
 public class Controller {
 
@@ -39,11 +24,8 @@ public class Controller {
   public Label offsetLbl;
   public Label keyPhraseLabel;
   @FXML
-  public TextField lblOutput;
-  @FXML
-  public Button btnOpenFile;
-  public AnchorPane anchorPane;
-  public ImageView imageDisplay;
+  private TextField lblOutput;
+
 
   public void initialize() {
     choiceBoxSelect();
@@ -51,7 +33,7 @@ public class Controller {
   }
 
   /**
-   * populates choice box on Cryptography tab
+   * populates choice box on Product Line tab
    */
   public void choiceBoxSelect() {
 
@@ -64,7 +46,7 @@ public class Controller {
   }
 
   /**
-   * populates offset choice box on Cryptography tab
+   * populates choice box on Product Line tab
    */
   public void offsetSelect() {
     for (int i = 1; i <= 5; i++) {
@@ -72,7 +54,6 @@ public class Controller {
       offsetChoice.getSelectionModel().selectFirst();
     }
   }
-
 
   public void offsetToggle() {
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
@@ -127,11 +108,10 @@ public class Controller {
         break;
       case Numeric:
         Cipher Numeric = new Numeric();
-        lblOutput.setText(Numeric.encrypt(plainString, 0, null).toString());
+        lblOutput.setText(Numeric.encrypt(plainString,0,null).toString());
     }
 
   }
-
 
   public void decrypt(MouseEvent mouseEvent) {
     String messString = messageString.getText();
@@ -153,7 +133,7 @@ public class Controller {
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
       case Numeric:
         Cipher Numeric = new Numeric();
-        lblOutput.setText(Numeric.decrypt(messString, 0, null).toString());
+        lblOutput.setText(Numeric.decrypt(messString,0,null).toString());
     }
   }
 
@@ -162,24 +142,43 @@ public class Controller {
     offsetToggle();
   }
 
-
-
-
-  public void openImage(MouseEvent mouseEvent) throws IOException {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Open Image File");
-    Stage stage = (Stage) anchorPane.getScene().getWindow();
-    final BorderPane root = new BorderPane();
-
-
-    File image = fileChooser.showOpenDialog(stage);
-
-
-    if (image != null){
-      Image img = new Image(image.toURI().toString());
-      ImageView mv = new ImageView(img);
-      root.setCenter(mv); // add ImageView to scene
+  @FXML
+  void adamLinkedIn(ActionEvent event) {
+    try {
+      URI uri= new URI("https://www.linkedin.com/in/adam-paul-0450561b9/");
+      java.awt.Desktop.getDesktop().browse(uri);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 
+  @FXML
+  void chrisLinkedIn(ActionEvent event) {
+    try {
+      URI uri= new URI("https://www.linkedin.com/in/cfrank95/");
+      java.awt.Desktop.getDesktop().browse(uri);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void jadenLinkedIn(ActionEvent event) {
+    try {
+      URI uri= new URI("https://www.linkedin.com/in/jaden-williams/");
+      java.awt.Desktop.getDesktop().browse(uri);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void joeLinkedIn(ActionEvent event) {
+    try {
+      URI uri= new URI("https://www.linkedin.com/in/morelli-j91/");
+      java.awt.Desktop.getDesktop().browse(uri);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
