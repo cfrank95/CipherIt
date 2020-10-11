@@ -1,20 +1,49 @@
+/*---------------------------------------------------------
+ file: Ciphers.java
+   by: Adam Paul, Jaden Williams,
+       Christopher Frank, Joseph Morelli
+  for: File containing all cipher classes used in our app
+ ---------------------------------------------------------*/
 
-public abstract class Cipher implements CipherControl {
+/**
+ * Ciphers class from which all ciphers inherit. Contains default methods for encrypt and decrypt.
+ */
+public abstract class Ciphers implements CipherControl {
 
-
+  /**
+   * Default encrypt method
+   *
+   * @return null
+   */
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
     return null;
   }
 
+  /**
+   * Default decrypt method
+   *
+   * @return null
+   */
   @Override
   public StringBuilder decrypt(String encryptedString, int offset, String key) {
     return null;
   }
 }
 
-class Atbash extends Cipher implements CipherControl {
+/**
+ * Class for Atbash type ciphers. Effectively flips the alphabet over. A -> Z, B -> Y, C -> X, etc.
+ */
+class Atbash extends Ciphers implements CipherControl {
 
+  /**
+   * Takes an input string and encrypts it by flipping the alphabet.
+   *
+   * @param plainString - phrase to encrypt
+   * @param offset      - irrelevant to encryption method
+   * @param key         - irrelevant to encryption method
+   * @return the encrypted message
+   */
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
 
@@ -54,6 +83,14 @@ class Atbash extends Cipher implements CipherControl {
 
   }
 
+  /**
+   * Takes an input string and decrypts it by flipping the alphabet.
+   *
+   * @param encryptedString - phrase to decrypt
+   * @param offset          - irrelevant to decryption method
+   * @param key             - irrelevant to decryption method
+   * @return the decrypted message
+   */
   @Override
   public StringBuilder decrypt(String encryptedString, int offset, String key) {
 
@@ -94,16 +131,20 @@ class Atbash extends Cipher implements CipherControl {
 
 }
 
-/**************************************************
- * Class: Caesar
- * Implementation:
- *     Class interacted with through GUI, shifting
- *     ACII values, allowing spaces and a-z
-***************************************************/
+/**
+ * Class for Caesar type ciphers. Shifts each letter of the alphabet over by a specified offset. For
+ * example, with offset 3, A -> D, B -> E, C -> F, etc.
+ */
+class Caesar extends Ciphers implements CipherControl {
 
-
-class Caesar extends Cipher implements CipherControl {
-
+  /**
+   * Takes an input string and encrypts it by shifting the ASCII code by a specified offset.
+   *
+   * @param plainString - phrase to encrypt
+   * @param offset      - specifies how many letters each letter will be offset by
+   * @param key         - irrelevant to encryption method
+   * @return the encrypted message
+   */
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
     StringBuilder encryptedString = new StringBuilder();
@@ -125,6 +166,14 @@ class Caesar extends Cipher implements CipherControl {
     return encryptedString;
   }
 
+  /**
+   * Takes an input string and decrypts it by shifting the ASCII code by a specified offset.
+   *
+   * @param encryptedString - phrase to decrypt
+   * @param offset          - specifies how many letters each letter will be offset by
+   * @param key             - irrelevant to decryption method
+   * @return the encrypted message
+   */
   @Override
   public StringBuilder decrypt(String encryptedString, int offset, String key) {
 
@@ -139,13 +188,13 @@ class Caesar extends Cipher implements CipherControl {
 
       if (letter <= 32) {
         decryptedString.append(" ");
-      }else if(letterInt < 65 && letterInt > 32) {
+      } else if (letterInt < 65 && letterInt > 32) {
         letterInt = 122 - (64 - letterInt);
         decryptedString.append((char) letterInt);
-      }else if(letterInt < 97 && letterInt > 90){
+      } else if (letterInt < 97 && letterInt > 90) {
         letterInt = 90 - (96 - letterInt);
         decryptedString.append((char) letterInt);
-      }else{
+      } else {
         decryptedString.append((char) letterInt);
       }
     }
@@ -156,11 +205,22 @@ class Caesar extends Cipher implements CipherControl {
 }
 
 
+/**
+ * Class for Vigenere type ciphers.  This encryption key also doubles as the key to decrypt the
+ * encrypted string.
+ */
+class Vigenere extends Ciphers implements CipherControl {
 
-class Vigenere extends Cipher implements CipherControl {
-
+  /**
+   * Takes an input string and a key string and encrypts the input string using the key string.
+   *
+   * @param plainString - phrase to encrypt
+   * @param offset      - irrelevant to encryption method
+   * @param key         - string used to encrypt plainString
+   * @return the encrypted message
+   */
   @Override
-  public StringBuilder encrypt(String phrase, int offset, String key) {
+  public StringBuilder encrypt(String plainString, int offset, String key) {
 
     StringBuilder newString = new StringBuilder();                //Final encrypted string
     int passChar;                         //Pass index value
@@ -169,8 +229,8 @@ class Vigenere extends Cipher implements CipherControl {
 
     //log.setTextLog("Encryption length = " + key.length());
 
-    for (int i = 0; i < phrase.length(); i++) {
-      char tempChar = (char) (phrase.charAt(i) - 96);   //phrase index character
+    for (int i = 0; i < plainString.length(); i++) {
+      char tempChar = (char) (plainString.charAt(i) - 96);   //phrase index character
       char newChar;                       //Temp character
 
       if (passIndex >= key.length() - 1) //Does encrypted password index need to be looped?
@@ -184,7 +244,7 @@ class Vigenere extends Cipher implements CipherControl {
       passChar =
           (int) key.charAt(passIndex) - 96;               //Encrypted char = Encrypted char at index
 
-      if (phrase.charAt(i)
+      if (plainString.charAt(i)
           != ' ') {                                            //If phrase character is not a space,
         System.out.println(
             (char) (tempChar + 96) + "," + (int) tempChar + " + " + (char) ((int) passChar + 96)
@@ -194,7 +254,8 @@ class Vigenere extends Cipher implements CipherControl {
             > 25) {                              //If phrase char and encryption char are over alphabet length,
           divisibility = ((tempChar + passChar)
               / 26);                  //How many times does the alphabet repeats
-          System.out.println(divisibility + " = divisible");              //How many times the alphabet is repeated
+          System.out.println(
+              divisibility + " = divisible");              //How many times the alphabet is repeated
           newChar = (char) Math.abs((tempChar + passChar) - (25 * divisibility)
               + 96);     //(Phrase char + encryption char) - (alphabet * alphabet iterations)
         } else {                                                         //Else if phrase is within alphabet range,
@@ -211,8 +272,16 @@ class Vigenere extends Cipher implements CipherControl {
     return newString;
   }
 
+  /**
+   * Takes an input string and a key string and decrypts the input string using the key string.
+   *
+   * @param encryptedString - phrase to decrypt
+   * @param offset          - irrelevant to decryption method
+   * @param key             - string used to decrypt encryptedString
+   * @return the decrypted message
+   */
   @Override
-  public StringBuilder decrypt(String encryption, int offset, String key) {
+  public StringBuilder decrypt(String encryptedString, int offset, String key) {
 
     StringBuilder newString = new StringBuilder();   //Final encrypted string
     int passChar;                         //Pass index value
@@ -221,8 +290,8 @@ class Vigenere extends Cipher implements CipherControl {
 
     //System.out.println("Encryption length = " + phraseEncrypter.length());
 
-    for (int i = 0; i < encryption.length(); i++) {
-      char tempChar = (char) (encryption.charAt(i) - 96);   //phrase index character
+    for (int i = 0; i < encryptedString.length(); i++) {
+      char tempChar = (char) (encryptedString.charAt(i) - 96);   //phrase index character
       char newChar;                       //Temp character
 
       if (passIndex >= key.length() - 1) //Does encrypted password index need to be looped?
@@ -236,7 +305,7 @@ class Vigenere extends Cipher implements CipherControl {
       passChar =
           (int) key.charAt(passIndex) - 96;               //Encrypted char = Encrypted char at index
 
-      if (encryption.charAt(i)
+      if (encryptedString.charAt(i)
           != ' ') {                                            //If phrase character is not a space,
         System.out.println(
             (char) (tempChar + 96) + "," + (int) tempChar + " - " + (char) ((int) passChar + 96)
@@ -276,49 +345,76 @@ class Vigenere extends Cipher implements CipherControl {
 
 }
 
-class Numeric extends Cipher implements CipherControl {
+/**
+ * Class for Numeric type ciphers. Assigns a numeric value to every character in the input string,
+ * with numeric values being broken up by spaces. Ex. A -> 1, B -> 2, C -> 3 . . .  Y -> 25, Z ->
+ * 26.
+ */
+class Numeric extends Ciphers implements CipherControl {
 
+  /**
+   * Takes an input string and encrypts it by replacing alphabetical values with their associated
+   * numerical values.
+   *
+   * @param plainString - phrase to encrypt
+   * @param offset      - irrelevant to encryption method
+   * @param key         - irrelevant to encryption method
+   * @return the encrypted message
+   */
   @Override
-  public StringBuilder encrypt(String encryption, int offset, String key){
+  public StringBuilder encrypt(String plainString, int offset, String key) {
     String tempInt = "";
     StringBuilder result = new StringBuilder();
 
-    for(int i = 0; i < encryption.length(); i++) {
-      if (encryption.charAt(i) != ' ') {
-        tempInt = String.valueOf((int) encryption.charAt(i) - 96);
-        if (i == 0)
+    for (int i = 0; i < plainString.length(); i++) {
+      if (plainString.charAt(i) != ' ') {
+        tempInt = String.valueOf((int) plainString.charAt(i) - 96);
+        if (i == 0) {
           result.append("" + (tempInt));
-        else
+        } else {
           result.append(" " + (tempInt));
+        }
       }
     }
 
     return result;
   }
 
+  /**
+   * Takes an input string and decrypts it by replacing numerical values with their associated
+   * alphabetical values.
+   *
+   * @param encryptedString - phrase to decrypt
+   * @param offset          - irrelevant to decryption method
+   * @param key             - irrelevant to decryption method
+   * @return the decrypted message
+   */
   @Override
-  public StringBuilder decrypt(String encryption, int offset, String key) {
+  public StringBuilder decrypt(String encryptedString, int offset, String key) {
     String tempLetter = " ";
     int stringConverter = 0;
     StringBuilder result = new StringBuilder();
 
-    for(int i = 0; i < encryption.length(); i++) {
-      if (encryption.charAt(i) != ' ') {
-        if(encryption.charAt(i) != ' ' &&  i < encryption.length() - 1 && encryption.charAt(i+1) != ' ') {
-          stringConverter = (Integer.parseInt(String.valueOf(encryption.charAt((i)))) * 10) + Integer.parseInt(String.valueOf(encryption.charAt((i + 1))));
+    for (int i = 0; i < encryptedString.length(); i++) {
+      if (encryptedString.charAt(i) != ' ') {
+        if (encryptedString.charAt(i) != ' ' && i < encryptedString.length() - 1
+            && encryptedString.charAt(i + 1) != ' ') {
+          stringConverter =
+              (Integer.parseInt(String.valueOf(encryptedString.charAt((i)))) * 10) + Integer
+                  .parseInt(String.valueOf(encryptedString.charAt((i + 1))));
           System.out.println("Interger = " + stringConverter);
-          tempLetter = "" + (char)(stringConverter + 96);
+          tempLetter = "" + (char) (stringConverter + 96);
           i++;
-        }
-        else {
-          char tempChar = (char)(encryption.charAt(i) + 48);
+        } else {
+          char tempChar = (char) (encryptedString.charAt(i) + 48);
           tempLetter = "" + tempChar;
         }
 
-        if (i == 0)
+        if (i == 0) {
           result.append("" + (tempLetter));
-        else
+        } else {
           result.append("" + (tempLetter));
+        }
       }
     }
     return result;

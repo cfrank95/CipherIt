@@ -107,21 +107,21 @@ public class Controller {
 
     switch (cipherType) {
       case Atbash:
-        Cipher Atbash = new Atbash();
+        Ciphers Atbash = new Atbash();
         lblOutput.setText(Atbash.encrypt(plainString, 0, null).toString());
         break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
-        Cipher Caesar = new Caesar();
+        Ciphers Caesar = new Caesar();
         lblOutput.setText(Caesar.encrypt(plainString, offset, null).toString());
         break;
       case Vigenere:
         String key = keyString.getText();
-        Cipher Vigenere = new Vigenere();
+        Ciphers Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.encrypt(plainString, 0, key).toString());
         break;
       case Numeric:
-        Cipher Numeric = new Numeric();
+        Ciphers Numeric = new Numeric();
         lblOutput.setText(Numeric.encrypt(plainString,0,null).toString());
     }
 
@@ -133,20 +133,20 @@ public class Controller {
 
     switch (cipherType) {
       case Atbash:
-        Cipher Atbash = new Atbash();
+        Ciphers Atbash = new Atbash();
         lblOutput.setText(Atbash.decrypt(messString, 0, null).toString());
         break;
       case Caesar:
         int offset = (int) offsetChoice.getValue();
-        Cipher Caesar = new Caesar();
+        Ciphers Caesar = new Caesar();
         lblOutput.setText(Caesar.decrypt(messString, offset, null).toString());
         break;
       case Vigenere:
         String key = keyString.getText();
-        Cipher Vigenere = new Vigenere();
+        Ciphers Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
       case Numeric:
-        Cipher Numeric = new Numeric();
+        Ciphers Numeric = new Numeric();
         lblOutput.setText(Numeric.decrypt(messString,0,null).toString());
     }
   }
