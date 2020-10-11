@@ -203,24 +203,9 @@ public class Controller {
      Stage stage = (Stage) anchorPane.getScene().getWindow();
      File file = fileChooser.showOpenDialog(stage);
 
-    BorderPane root = new BorderPane();
-
-
       if (file != null) { // only proceed, if file was chosen
         Image img = new Image(file.toURI().toString());
-        imageDisplay = new ImageView(img);
-        root.setCenter(imageDisplay); // add ImageView to scene
-        imageDisplay.setFitHeight(455);
-        imageDisplay.setFitWidth(500);
-        imageDisplay.setX(50);
-        imageDisplay.setY(25);
-        imageDisplay.setPreserveRatio(true);
-        Group toot = new Group(imageDisplay);
-        Scene scene = new Scene(toot, 600, 500);
-        stage.setTitle("Loading an image");
-        stage.setScene(scene);
-        stage.show();
-
+        imageDisplay.setImage(img);
       }
     }
 }
