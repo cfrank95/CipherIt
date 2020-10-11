@@ -1,5 +1,6 @@
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Scanner;
@@ -197,6 +198,7 @@ public class Controller {
     }
   }
 
+  ImageCipher imageCipher = new ImageCipher();
   public void uploadImage(MouseEvent mouseEvent) throws IOException {
      FileChooser fileChooser = new FileChooser();
      fileChooser.setTitle("Open Image File");
@@ -206,12 +208,19 @@ public class Controller {
       if (file != null) { // only proceed, if file was chosen
         Image img = new Image(file.toURI().toString());
         imageDisplay.setImage(img);
+        imageCipher.setOriginalImage(img);
       }
     }
 
-  public void decryptImage(MouseEvent mouseEvent) {
+  public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
   }
 
-  public void encryptImage(MouseEvent mouseEvent) {
+  public void encryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
+    Stage stage = (Stage) anchorPane.getScene().getWindow();
+
+    if (imageCipher.getOriginalImage() != null) { // only proceed, if file was chosen
+      imageCipher.start(stage);
+    }
   }
+
 }
