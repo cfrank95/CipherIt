@@ -135,6 +135,11 @@
                 <ImageView fx:id="imageDisplay" fitHeight="462.0" fitWidth="474.0" layoutX="108.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
                 <Button layoutX="359.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#encryptImage" prefHeight="32.0" prefWidth="122.0" styleClass="redButton" text="Encrypt" />
                 <Button layoutX="497.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#decryptImage" prefHeight="32.0" prefWidth="124.0" styleClass="redButton" text="Decrypt" />
+                        <ImageView id="coolCodeImage" fitHeight="588.0" fitWidth="694.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="https://i.imgur.com/2uKuKHb.png" />
+                           </image>
+                        </ImageView>
               </children>
             </AnchorPane>
           </content>
