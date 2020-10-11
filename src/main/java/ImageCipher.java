@@ -43,11 +43,11 @@ public class ImageCipher extends Application{
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
 
-        int numLocations = 3;
+        int numLocations = 10;
         int numCells = (int) Math.pow(numLocations, 2);
         int[] cells;
 
-        int offset = 2;
+        int offset = 4;
 
         // Initialization of variables for image characteristics
         int width = (int) originalImage.getWidth();
@@ -61,28 +61,48 @@ public class ImageCipher extends Application{
             cells[i] = i;
         }
 
+//        for(int o = 0; o < offset; o++) {
+//            for (int i = 0; i < numLocations; i++) {
+//                int test;
+//                int delta;
+//                int prev = count;
+//                int next = count + 1;
+//                int pairNums = numLocations / 2;
+//
+//                // Fix to alternate image
+//                for (int j = numLocations; j > 0; j--) {
+//                    test = count;
+//                    if (test > numCells) {
+//                        delta = test - numCells;
+//                        count = delta;
+//                        encryptCells[elem] = count;
+//                    } else
+//                        encryptCells[elem] = test;
+//                    if(pairNums > 1)
+//                        count += 2;
+//
+//                    else
+//                        count += 1;
+//                    elem++;
+//                }
+//                count++;
+//            }
+//        }
+
         int count = offset;
         int elem = 0;
-        for(int i = 1; i <= numLocations; i++){
-            int test;
+        for(int i = 0; i < numCells; i++){
+            int test = count + 1;
             int delta;
-
-            // Fix to alternate image
-            for(int j = 1; j <= numLocations; j++){
-                test = count;
-                if(test >= numCells) {
-                    delta = test - numCells;
-                    count = delta;
-                    encryptCells[elem] = count;
-                }else
-                    encryptCells[elem] = test;
-                if(j != 3)
-                    count += numLocations;
-                elem++;
+            if (test > numCells) {
+                delta = test - numCells;
+                count = i - delta;
+                encryptCells[i] = count;
+            }else{
+                encryptCells[i] = count;
             }
             count++;
         }
-
 
         // Create a writable image
         WritableImage wImage = new WritableImage(width, height);
