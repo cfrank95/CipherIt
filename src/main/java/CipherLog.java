@@ -4,8 +4,10 @@
        Christopher Frank, Joseph Morelli
   for: Class for logging cipher encrypts/decrypts
  ---------------------------------------------------------*/
-/** Class CipherLog concerns the "Log" TextArea in the cryptography class.
- *  This class implements basic functionality for the Log text field.
+
+/**
+ * Class CipherLog concerns the "Log" TextArea in the cryptography class. This class implements
+ * basic functionality for the Log text field.
  */
 public class CipherLog {
 
@@ -13,19 +15,21 @@ public class CipherLog {
   String message = "";
   String cipherType = "";
 
-  /** CipherLog constructor
+  /**
+   * CipherLog constructor
    *
-   * @param cipherType  - type of cipher last used
-   * @param message     - message last encrypted or decrypted
+   * @param cipherType - type of cipher last used
+   * @param message    - message last encrypted or decrypted
    */
   public CipherLog(String message, String cipherType) {
     this.message = message;
     this.cipherType = cipherType;
   }
 
-  /** Prints CipherLog object.
+  /**
+   * Prints CipherLog object.
    *
-   *  @return the formatted string displaying the CipherLog object's information
+   * @return the formatted string displaying the CipherLog object's information
    */
   @Override
   public String toString() {
