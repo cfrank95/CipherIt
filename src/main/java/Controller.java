@@ -160,6 +160,9 @@ public class Controller {
     textLog.setText(" ");
     CipherLog recordLog = new CipherLog(messString, cipherType.toString());
     logs.add(recordLog.toString());
+    for(String a : logs){
+      textLog.appendText(a + "\n");
+    }
 
     switch (cipherType) {
       case Atbash:
