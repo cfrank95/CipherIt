@@ -43,9 +43,11 @@ public class ImageCipher extends Application{
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
 
-        int numLocations = 3;
+        int numLocations = 20;
         int numCells = (int) Math.pow(numLocations, 2);
         int[] cells;
+
+        int offset = 15;
 
         // Initialization of variables for image characteristics
         int width = (int) originalImage.getWidth();
@@ -57,10 +59,10 @@ public class ImageCipher extends Application{
         int[] encryptCells = new int[numCells];
         for(int i = 0; i < numCells; i++){
             cells[i] = i;
-            if(i + 1 < numCells)
-                encryptCells[i] = i + 1;
+            if(i + offset < numCells)
+                encryptCells[i] = i + offset;
             else
-                encryptCells[i] = 0;
+                encryptCells[i] = (numCells - i);
             System.out.println(encryptCells[i]);
         }
 
@@ -91,23 +93,23 @@ public class ImageCipher extends Application{
         PixelWriter writer = wImage.getPixelWriter();
 
         // Reading color of image
-        int xElm = 1;
-        int yElm = 1;
+        int xElm = 0;
+        int yElm = 0;
         int totalElm = 1;
 
         while(totalElm < numCells + 1) {
 
-            yElm = 1;
-            while(yElm < 4) {
+            yElm = 0;
+            while(yElm < numLocations) {
 
-                xElm = 1;
-                while (xElm < 4) {
+                xElm = 0;
+                while (xElm < numLocations) {
 
-                    int readY = (yElm - 1) * copyHeight;
+                    int readY = yElm * copyHeight;
                     for (int y = 0; y < copyHeight; y++) {
                         int writeY;
 
-                        int readX = (xElm - 1) * copyWidth;
+                        int readX = xElm  * copyWidth;
                         int writeX;
                         for (int x = 0; x < copyWidth; x++) {
                             // Retrieving the color of the pixel of the loaded image
@@ -115,15 +117,18 @@ public class ImageCipher extends Application{
                             readX++;
 
                             // Write color to wImage
-                            writeX = ((encryptCells[totalElm - 1]) % numLocations) * copyWidth + x;
-                            writeY = (encryptCells[totalElm - 1] / numLocations) * copyHeight + y;
+//                            writeX = ((encryptCells[totalElm - 1]) % numLocations) * copyWidth + x;
+//                            writeY = (encryptCells[totalElm - 1] / numLocations) * copyHeight + y;
+                            writeX = ((encryptCells[xElm] % numLocations) * copyWidth + x);
+                            writeY = ((encryptCells[yElm] % numLocations) * copyHeight + y);
                             writer.setColor(writeX, writeY, color);
-                            System.out.println("Write X: " + writeX + " , Write Y: " + writeY);
+                            // System.out.println("Write X: " + writeX + " , Write Y: " + writeY);
                         }
                         readY++;
                     }
                     xElm++;
                     totalElm++;
+                    System.out.println(totalElm);
                 }
                 yElm++;
             }
