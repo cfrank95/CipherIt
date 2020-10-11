@@ -1,7 +1,11 @@
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.Scanner;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -132,5 +136,45 @@ public class Controller {
 
   public void typeSelect(javafx.event.ActionEvent actionEvent) {
     offsetToggle();
+  }
+
+  @FXML
+  void adamLinkedIn(ActionEvent event) {
+    try {
+      URI link= new URI("https://www.linkedin.com/in/adam-paul-0450561b9/");
+      java.awt.Desktop.getDesktop().browse(link);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void chrisLinkedIn(ActionEvent event) {
+    try {
+      URI link= new URI("https://www.linkedin.com/in/cfrank95/");
+      java.awt.Desktop.getDesktop().browse(link);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void jadenLinkedIn(ActionEvent event) {
+    try {
+      URI link= new URI("https://www.linkedin.com/in/jaden-williams/");
+      java.awt.Desktop.getDesktop().browse(link);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void joeLinkedIn(ActionEvent event) {
+    try {
+      URI link= new URI("https://www.linkedin.com/in/morelli-j91/");
+      java.awt.Desktop.getDesktop().browse(link);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
