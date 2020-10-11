@@ -195,7 +195,7 @@
                     <Font size="24.0" />
                   </font>
                 </Text>
-                        <ImageView id="coolCodeImage" fitHeight="588.0" fitWidth="694.0" layoutX="-1.0" layoutY="-35.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="coolCodeImage" fitHeight="588.0" fitWidth="694.0" layoutX="-1.0" layoutY="-49.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="https://i.imgur.com/B483S1D.jpg" />
                            </image>
