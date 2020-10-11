@@ -139,7 +139,7 @@ public class Controller {
   @FXML
   void adamLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("jadenw.com");
+      URI uri= new URI("https://www.linkedin.com/in/adam-paul-0450561b9/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
@@ -149,7 +149,7 @@ public class Controller {
   @FXML
   void chrisLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("jadenw.com");
+      URI uri= new URI("https://www.linkedin.com/in/cfrank95/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
@@ -159,7 +159,7 @@ public class Controller {
   @FXML
   void jadenLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("jadenw.com");
+      URI uri= new URI("https://www.linkedin.com/in/jaden-williams/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
@@ -169,7 +169,7 @@ public class Controller {
   @FXML
   void joeLinkedIn(ActionEvent event) {
     try {
-      URI uri= new URI("jadenw.com");
+      URI uri= new URI("https://www.linkedin.com/in/morelli-j91/");
       java.awt.Desktop.getDesktop().browse(uri);
     } catch (Exception e) {
       e.printStackTrace();
