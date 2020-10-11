@@ -11,7 +11,6 @@
  */
 public class CipherLog {
 
-  int logNumber = 1;
   String message = "";
   String cipherType = "";
 
@@ -34,28 +33,9 @@ public class CipherLog {
   @Override
   public String toString() {
     String record =
-        "Log #: " + logNumber + " --- " + "Message Ciphered: " + message + " --- " + "Cipher Type: "
+        "Log --- " + "Message Ciphered: " + message + " --- " + " Cipher Type: "
             + cipherType;
-    logNumber++;
     return record;
-  }
-
-  /**
-   * getter for log number
-   *
-   * @return current log number
-   */
-  public int getLogNumber() {
-    return logNumber;
-  }
-
-  /**
-   * setter for log number
-   *
-   * @param logNumber - new value of logNumber being passed in
-   */
-  public void setLogNumber(int logNumber) {
-    this.logNumber = logNumber;
   }
 
   /**
@@ -93,6 +73,4 @@ public class CipherLog {
   public void setCipherType(String cipherType) {
     this.cipherType = cipherType;
   }
-
-
 }
