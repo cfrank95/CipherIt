@@ -30,7 +30,7 @@ public class ImageCipher extends Application{
         return originalImage;
     }
 
-    void setCipheredImage(Image originalImage){
+    void setCipheredImage(Image cipheredImage){
         this.cipheredImage = cipheredImage;
     }
 
@@ -39,12 +39,44 @@ public class ImageCipher extends Application{
     }
 
 
-
     @Override
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
+
+        int numLocations = 3;
+        int numCells = (int) Math.pow(numLocations, 2);
+        int[] cells;
+
+        // Initialization of variables for image characteristics
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
+        int copyWidth = width / numLocations;
+        int copyHeight = height / numLocations;
+
+        cells = new int[numCells];
+        int[] encryptCells = new int[numCells];
+        for(int i = 0; i < numCells; i++){
+            cells[i] = i;
+            if(i + 1 < numCells)
+                encryptCells[i] = i + 1;
+            else
+                encryptCells[i] = 0;
+            System.out.println(encryptCells[i]);
+        }
+
+        // Cypher
+//        int rowIndex;
+//        for(int i = 0; i < numCells; i++){
+//            if (i != numCells - 1)
+//                rowIndex = i++;
+//            else
+//                rowIndex = 0;
+//
+//            int temp = cells[i];
+//            cells[i] = cells[rowIndex];
+//            cells[rowIndex] = temp;
+//            System.out.println(cells[i]);
+//        }
 
 
 
@@ -57,13 +89,43 @@ public class ImageCipher extends Application{
 
         // Create Pixel Writer Object
         PixelWriter writer = wImage.getPixelWriter();
+
         // Reading color of image
-        for(int x = 0; x < width; x++){
-            for(int y = 0; y < height; y++){
-                // Retrieving the color of the pixel of the loaded image
-                Color color = pixelReader.getColor(x, y);
-                // Write color to wImage
-                writer.setColor(x, y, color);
+        int xElm = 1;
+        int yElm = 1;
+        int totalElm = 1;
+
+        while(totalElm < numCells + 1) {
+
+            yElm = 1;
+            while(yElm < 4) {
+
+                xElm = 1;
+                while (xElm < 4) {
+
+                    int readY = (yElm - 1) * copyHeight;
+                    for (int y = 0; y < copyHeight; y++) {
+                        int writeY;
+
+                        int readX = (xElm - 1) * copyWidth;
+                        int writeX;
+                        for (int x = 0; x < copyWidth; x++) {
+                            // Retrieving the color of the pixel of the loaded image
+                            Color color = pixelReader.getColor(readX, readY);
+                            readX++;
+
+                            // Write color to wImage
+                            writeX = ((encryptCells[totalElm - 1]) % numLocations) * copyWidth + x;
+                            writeY = (encryptCells[totalElm - 1] / numLocations) * copyHeight + y;
+                            writer.setColor(writeX, writeY, color);
+                            System.out.println("Write X: " + writeX + " , Write Y: " + writeY);
+                        }
+                        readY++;
+                    }
+                    xElm++;
+                    totalElm++;
+                }
+                yElm++;
             }
         }
 
@@ -71,6 +133,7 @@ public class ImageCipher extends Application{
         ImageView imageView = new ImageView(wImage);
         imageView.fitHeightProperty();
         imageView.fitWidthProperty();
+
 
 
         // Creating a Group object
@@ -89,4 +152,32 @@ public class ImageCipher extends Application{
         cipherStage.show();
     }
 
+
+
 }
+
+//class Divisions extends ImageCipher{
+//    int startX, startY, endX, endY;
+//
+//    public void setStartX() {
+//        this.startX = startX;
+//    }
+//    public void setStartY() {
+//        this.startY = startY;
+//    }
+//    public void setEndX() {
+//        this.endX = endX;
+//    }
+//    public void setEndY() {
+//        this.endY = endY;
+//    }
+//
+//    Divisions(int sX, int sY, int eX, int eY){
+//        startX = sX;
+//        startY = sY;
+//        endX = eX;
+//        endY = eY;
+//
+//    }
+//
+//}
