@@ -135,7 +135,6 @@ public class Controller {
         Ciphers Numeric = new Numeric();
         lblOutput.setText(Numeric.encrypt(plainString, 0, null).toString());
     }
-
   }
 
   /**

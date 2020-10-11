@@ -111,7 +111,7 @@
                         <Insets />
                       </GridPane.margin>
                     </ChoiceBox>
-                    <Label prefHeight="19.0" prefWidth="183.0" text="Cryptography Type:" GridPane.rowIndex="1" />
+                    <Label prefHeight="19.0" prefWidth="183.0" text="Cipher Type:" GridPane.rowIndex="1" />
                     <Label fx:id="offsetLbl" GridPane.rowIndex="2" />
                     <ChoiceBox fx:id="offsetChoice" prefWidth="150.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                       <GridPane.margin>
