@@ -239,6 +239,11 @@ public class Controller {
 
   ImageCipher imageCipher = new ImageCipher();
 
+  /**
+   * Prompts user to upload an image from their machine upon clicking the Upload Image button.
+   *
+   * @param mouseEvent - passed upon clicking on the Upload Image button in the pyctography tab
+   */
   public void uploadImage(MouseEvent mouseEvent) throws IOException {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Image File");
@@ -252,6 +257,11 @@ public class Controller {
     }
   }
 
+  /**
+   * On a button click, encrypts the image selected by the user via the uploadImage() method.
+   *
+   * @param mouseEvent - passed upon clicking on the Encrypt button in the pyctography tab
+   */
   public void encryptImage(MouseEvent mouseEvent)
       throws FileNotFoundException, InterruptedException {
     // imageDisplay.imageProperty().setValue(null);
@@ -262,6 +272,11 @@ public class Controller {
     }
   }
 
+  /**
+   * On a button click, decrypts the image selected by the user via the uploadImage() method.
+   *
+   * @param mouseEvent - passed upon clicking on the Decrypt button in the pyctography tab
+   */
   public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
   }
 
