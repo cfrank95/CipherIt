@@ -67,6 +67,7 @@ public class ImageCipher extends Application{
             int test;
             int delta;
 
+            // Fix to alternate image
             for(int j = 1; j <= numLocations; j++){
                 test = count;
                 if(test >= numCells) {
