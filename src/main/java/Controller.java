@@ -52,7 +52,7 @@ public class Controller {
   }
 
   /**
-   * Populates choice box on Product Line tab
+   * Populates Cipher Type choice box
    */
   public void choiceBoxSelect() {
 
@@ -63,13 +63,13 @@ public class Controller {
   }
 
   /**
-   * Populates choice box on Product Line tab
+   * Populates Offset choice box
    */
   public void offsetSelect() {
     for (int i = 1; i <= 5; i++) {
       offsetChoice.getItems().add(i);
-      offsetChoice.getSelectionModel().selectFirst();
     }
+    offsetChoice.getSelectionModel().selectFirst();
   }
 
   /**
@@ -162,6 +162,7 @@ public class Controller {
         String key = keyString.getText();
         Ciphers Vigenere = new Vigenere();
         lblOutput.setText(Vigenere.decrypt(messString, 0, key).toString());
+        break;
       case Numeric:
         Ciphers Numeric = new Numeric();
         lblOutput.setText(Numeric.decrypt(messString, 0, null).toString());

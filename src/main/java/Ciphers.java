@@ -222,6 +222,8 @@ class Vigenere extends Ciphers implements CipherControl {
   @Override
   public StringBuilder encrypt(String plainString, int offset, String key) {
 
+    plainString = plainString.toLowerCase(); // convert to lowercase for compatibility
+    key = key.toLowerCase(); // for compatibility
     StringBuilder newString = new StringBuilder();                //Final encrypted string
     int passChar;                         //Pass index value
     int passIndex = -1;                    //Pass array value
@@ -283,6 +285,8 @@ class Vigenere extends Ciphers implements CipherControl {
   @Override
   public StringBuilder decrypt(String encryptedString, int offset, String key) {
 
+    encryptedString = encryptedString.toLowerCase(); // for compatibility
+    key = key.toLowerCase(); // for compatibility
     StringBuilder newString = new StringBuilder();   //Final encrypted string
     int passChar;                         //Pass index value
     int passIndex = -1;                    //Pass array value
