@@ -212,15 +212,16 @@ public class Controller {
       }
     }
 
-  public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
-  }
+  public void encryptImage(MouseEvent mouseEvent) throws FileNotFoundException, InterruptedException {
+    imageDisplay.imageProperty().setValue(null);
 
-  public void encryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
-    Stage stage = (Stage) anchorPane.getScene().getWindow();
-
+    Stage stage = new Stage();
     if (imageCipher.getOriginalImage() != null) { // only proceed, if file was chosen
       imageCipher.start(stage);
     }
+  }
+
+  public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
   }
 
 }

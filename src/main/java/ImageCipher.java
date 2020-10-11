@@ -41,7 +41,7 @@ public class ImageCipher extends Application{
 
 
     @Override
-    public void start(Stage cipherStage) throws FileNotFoundException {
+    public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getWidth();
@@ -54,15 +54,14 @@ public class ImageCipher extends Application{
 
         // Create Pixel Writer Object
         PixelWriter writer = wImage.getPixelWriter();
-
+        System.out.println("x: " + width + ", y: " + height);
         // Reading color of image
-        for(int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
                 // Retrieving the color of the pixel of the loaded image
                 Color color = pixelReader.getColor(x, y);
-
                 // Write color to wImage
-                writer.setColor(x, y, color.darker());
+                writer.setColor(x, y, color);
             }
         }
 
@@ -73,7 +72,7 @@ public class ImageCipher extends Application{
         Group root = new Group(imageView);
 
         // Creating a scene object
-        Scene scene = new Scene(root, 600, 500);
+        Scene scene = new Scene(root, width, height);
 
         // Setting title to the Stage
         cipherStage.setTitle("Writing Image...");

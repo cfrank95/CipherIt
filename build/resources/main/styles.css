@@ -2,7 +2,7 @@
   -fx-font-family: "arial";
   -fx-text-fill: white;
   -fx-font-size: 16px;
-  -fx-background-color: #e5e6e8;
+  -fx-background-color: #c1c0bf;
 }
 
 .button {
@@ -16,6 +16,6 @@
 }
 
 .tab-pane {
-  -fx-border-color: #727d89;
-  -fx-border-width: 5px;
+  -fx-border-color: orangered;
+  -fx-border-width: 1.5px;
 }
