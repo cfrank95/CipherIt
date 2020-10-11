@@ -112,11 +112,20 @@
                               <Image url="https://i.imgur.com/8n4Hw5u.png" />
                            </image>
                         </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Pictography" />
+        <Tab text="Pictography">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#uploadImage" text="Upload Image" />
+                        <ImageView fx:id="imageDisplay" fitHeight="364.0" fitWidth="460.0" layoutX="112.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
             <Tab text="Credits">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

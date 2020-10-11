@@ -1,3 +1,6 @@
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
@@ -7,7 +10,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class Controller {
@@ -23,6 +32,8 @@ public class Controller {
   public TextField keyString;
   public Label offsetLbl;
   public Label keyPhraseLabel;
+  public ImageView imageDisplay;
+  public AnchorPane anchorPane;
   @FXML
   private TextField lblOutput;
 
@@ -142,6 +153,8 @@ public class Controller {
     offsetToggle();
   }
 
+
+
   @FXML
   void adamLinkedIn(ActionEvent event) {
     try {
@@ -181,4 +194,21 @@ public class Controller {
       e.printStackTrace();
     }
   }
+
+  public void uploadImage(MouseEvent mouseEvent) throws IOException {
+     FileChooser fileChooser = new FileChooser();
+     fileChooser.setTitle("Open Image File");
+     Stage stage = (Stage) anchorPane.getScene().getWindow();
+     File file = fileChooser.showOpenDialog(stage);
+
+    BorderPane root = new BorderPane();
+
+
+      if (file != null) { // only proceed, if file was chosen
+        Image img = new Image(file.toURI().toString());
+        imageDisplay = new ImageView(img);
+        root.setCenter(imageDisplay); // add ImageView to scene
+      }
+
+    }
 }
