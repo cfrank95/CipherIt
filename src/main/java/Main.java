@@ -1,3 +1,10 @@
+/*---------------------------------------------------------
+ file: Main.java
+   by: Adam Paul, Jaden Williams,
+       Christopher Frank, Joseph Morelli
+  for: Main method for program execution
+ ---------------------------------------------------------*/
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -33,7 +40,7 @@ public class Main extends Application {
 
     Scene scene = new Scene(root);
 
-    primaryStage.setTitle("Encryption Project");
+    primaryStage.setTitle("Cipher It!");
 
     primaryStage.setScene(scene);
 
