@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -39,6 +40,7 @@ public class Controller {
   public TextField lblOutput;
   @FXML
   public Button btnOpenFile;
+  public AnchorPane anchorPane;
 
   public void initialize() {
     choiceBoxSelect();
@@ -158,40 +160,18 @@ public class Controller {
   }
 
 
-  /* ---------------------------------------------
-  *  FILE CHOOSER FOR IMAGE CYPHER
-  */
-  private Desktop desktop = Desktop.getDesktop();
 
-  private void openFile(File file) {
-    try {
-      desktop.open(file);
-    } catch (IOException ex) {
-      Logger.getLogger(
-              FileChooser.class.getName()).log(
-              Level.SEVERE, null, ex
-      );
+
+  public void openImage(MouseEvent mouseEvent) throws IOException {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Image File");
+    Stage stage = (Stage) anchorPane.getScene().getWindow();
+
+    File image = fileChooser.showOpenDialog(stage);
+    if (image != null){
+      Desktop desktop = Desktop.getDesktop();
+      desktop.open(image);
     }
+
   }
-
-  public void start(final Stage stage){
-    stage.setTitle("File Chooser");
-
-    final FileChooser fileChooser = new FileChooser();
-
-    final GridPane inputGridPane = new GridPane();
-
-    GridPane.setConstraints(btnOpenFile, 0, 0);
-    inputGridPane.setHgap(6);
-    inputGridPane.setVgap(6);
-    inputGridPane.getChildren().addAll(btnOpenFile);
-
-    final Pane rootGroup = new VBox(12);
-    rootGroup.getChildren().addAll(inputGridPane);
-    rootGroup.setPadding(new Insets(12, 12, 12, 12));
-
-    stage.setScene(new Scene(rootGroup));
-    stage.show();
-  }
-
 }
