@@ -5,13 +5,14 @@
   for: Class for logging cipher encrypts/decrypts
  ---------------------------------------------------------*/
 
+import javax.crypto.Cipher;
+
 /**
  * Class CipherLog concerns the "Log" TextArea in the cryptography class. This class implements
  * basic functionality for the Log text field.
  */
 public class CipherLog {
 
-  int logNumber = 1;
   String message = "";
   String cipherType = "";
 
@@ -34,28 +35,9 @@ public class CipherLog {
   @Override
   public String toString() {
     String record =
-        "Log #: " + logNumber + " --- " + "Message Ciphered: " + message + " --- " + "Cipher Type: "
+        "Log --- " + "Message Ciphered: " + message + " --- " + " Cipher Type: "
             + cipherType;
-    logNumber++;
     return record;
-  }
-
-  /**
-   * getter for log number
-   *
-   * @return current log number
-   */
-  public int getLogNumber() {
-    return logNumber;
-  }
-
-  /**
-   * setter for log number
-   *
-   * @param logNumber - new value of logNumber being passed in
-   */
-  public void setLogNumber(int logNumber) {
-    this.logNumber = logNumber;
   }
 
   /**
