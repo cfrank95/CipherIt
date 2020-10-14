@@ -112,7 +112,7 @@ public class Controller {
     String plainString = messageString.getText();
     CipherType cipherType = CipherType.valueOf(choiceBox.getValue().toString());
 
-    textLog.setText(" ");
+    textLog.setText("");
     CipherLog recordLog = new CipherLog(plainString, cipherType.toString());
     logs.add(recordLog.toString());
     for(String a : logs){

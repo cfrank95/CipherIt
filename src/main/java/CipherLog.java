@@ -11,8 +11,8 @@
  */
 public class CipherLog {
 
-  String message = "";
-  String cipherType = "";
+  protected String message = "";
+  protected String cipherType = "";
 
   /**
    * CipherLog constructor
@@ -33,8 +33,8 @@ public class CipherLog {
   @Override
   public String toString() {
     String record =
-        "Log --- " + "Message Ciphered: " + message + " --- " + " Cipher Type: "
-            + cipherType;
+        "Log --- " + "Message Ciphered: " + getMessage() + " --- " + " Cipher Type: "
+            + getCipherType();
     return record;
   }
 
