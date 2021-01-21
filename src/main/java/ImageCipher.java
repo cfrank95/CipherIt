@@ -61,9 +61,9 @@ public class ImageCipher extends Application{
         // PART 1: Read Image into Elements
         // *****
 
-        for(int y = 1; y < height; y++){
+        for(int y = 0; y < height; y++){
 
-            for(int x = 1; x < width; x++){
+            for(int x = 0; x < width; x++){
 
                 Color color = pixelReader.getColor(x, y);
 
