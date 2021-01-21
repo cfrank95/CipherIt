@@ -35,7 +35,7 @@ public class ImageCipher extends Application{
         final int numLocations = 4;
         int numCells = (int) Math.pow(numLocations, 2);
 
-        int iterations = 2;
+        int iterations = 1;
 
         // Initialization of variables for image characteristics
         int width = (int) cipherImage.getWidth() - (int) (cipherImage.getWidth() % 4);
@@ -99,10 +99,10 @@ public class ImageCipher extends Application{
                         tempPositions1[11] = encryptedPositions[i];
                         break;
                     case 5:
-                        tempPositions1[2] = encryptedPositions[i];
+                        tempPositions1[13] = encryptedPositions[i];
                         break;
                     case 6:
-                        tempPositions1[13] = encryptedPositions[i];
+                        tempPositions1[2] = encryptedPositions[i];
                         break;
                     case 7:
                         tempPositions1[0] = encryptedPositions[i];
