@@ -1,58 +1,31 @@
 // FrankencipherV1 by Chris Frank
 
-import java.awt.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.control.Button;
-
-import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
 
 public class ImageDecipher extends Application{
     // Create Image
-    Image cipheredImage;
-    Image originalImage;
+    Image cipherImage;
 
     ImageDecipher(){
     }
 
-    void setOriginalImage(Image originalImage){
-        this.originalImage = originalImage;
+    void setCipherImage(Image originalImage){
+        this.cipherImage = originalImage;
     }
 
-    Image getOriginalImage(){
-        return originalImage;
-    }
-
-    void setCipheredImage(Image cipheredImage){
-        this.cipheredImage = cipheredImage;
-    }
-
-    Image getCipheredImage(){
-        return cipheredImage;
+    Image getCipherImage(){
+        return cipherImage;
     }
 
 
@@ -66,14 +39,14 @@ public class ImageDecipher extends Application{
         int iterations = 2;
 
         // Initialization of variables for image characteristics
-        int width = (int) originalImage.getWidth() - (int) (originalImage.getWidth() % 4);
-        int height = (int) originalImage.getHeight() - (int) (originalImage.getHeight() % 4);
+        int width = (int) cipherImage.getWidth() - (int) (cipherImage.getWidth() % 4);
+        int height = (int) cipherImage.getHeight() - (int) (cipherImage.getHeight() % 4);
 
 
         // Create a writable image
 
         // Reading color from loaded image
-        PixelReader pixelReader = originalImage.getPixelReader();
+        PixelReader pixelReader = cipherImage.getPixelReader();
 
         // Creates an array to hold writable image objects
         WritableImage[] wImages = new WritableImage[numCells];
@@ -199,31 +172,7 @@ public class ImageDecipher extends Application{
         }
 
 
-        // Setting the view for the writable image
-        ImageView imageView = new ImageView(wImage);
-        imageView.fitHeightProperty();
-        imageView.fitWidthProperty();
-
-        // Creating a Group object
-        Group root = new Group(imageView);
-
-        // Creating a scene object
-        Scene scene = new Scene(root, width, height);
-
-        // Setting title to the Stage
-        cipherStage.setTitle("Writing Image...");
-
-        // Add button for saving image
-        Button saveButton = new Button("Save");
-
-
-
-
-        // Adding scene to the stage
-        cipherStage.setScene(scene);
-
-        // Displaying contents of the stage
-        cipherStage.show();
+        setCipherImage(wImage);
 
     }
 

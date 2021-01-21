@@ -267,7 +267,6 @@ public class Controller {
     if (file != null) { // only proceed, if file was chosen
       Image img = new Image(file.toURI().toString());
       imageDisplay.setImage(img);
-      imageCipher.setCipherImage(img);
     }
   }
 
@@ -291,10 +290,14 @@ public class Controller {
       throws FileNotFoundException, InterruptedException {
 
     Stage stage = new Stage();
-    if (imageCipher.getCipherImage() != null) { // only proceed, if file was chosen
+
+    if (imageDisplay.getImage() != null) { // only proceed, if file was chosen
+      Image image = imageDisplay.getImage();
+      imageCipher.setCipherImage(image);
       imageCipher.start(stage);
-      Image image = imageCipher.getCipherImage();
+      image = imageCipher.getCipherImage();
       imageDisplay.setImage(image);
+
     }
   }
 
@@ -303,12 +306,20 @@ public class Controller {
    *
    * @param mouseEvent - passed upon clicking on the Decrypt button in the pyctography tab
    */
+
+  ImageDecipher imageDecipher = new ImageDecipher();
+
   public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException, InterruptedException {
+
     Stage stage = new Stage();
-    if (imageCipher.getCipherImage() != null) { // only proceed, if file was chosen
-      imageCipher.start(stage);
-      Image image = imageCipher.getCipherImage();
+
+    if (imageDisplay.getImage() != null) { // only proceed, if file was chosen
+      Image image  = imageDisplay.getImage();
+      imageDecipher.setCipherImage(image);
+      imageDecipher.start(stage);
+      image = imageDecipher.getCipherImage();
       imageDisplay.setImage(image);
+
     }
   }
 
