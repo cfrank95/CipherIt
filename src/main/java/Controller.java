@@ -5,6 +5,8 @@
   for: Controller class for all GUI interactions
  ---------------------------------------------------------*/
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +24,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
 
 /**
  * Controller class for user interactions with the GUI
@@ -263,8 +267,19 @@ public class Controller {
     if (file != null) { // only proceed, if file was chosen
       Image img = new Image(file.toURI().toString());
       imageDisplay.setImage(img);
-      imageCipher.setOriginalImage(img);
+      imageCipher.setCipherImage(img);
     }
+  }
+
+
+  public void downloadImage(MouseEvent mouseEvent) throws IOException{
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Choose Location to Save Image");
+    Image image = imageCipher.getCipherImage();
+    BufferedImage buffered = new BufferedImage((int)image.getWidth(), (int)image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    Stage stage = (Stage) imageDisplay.getScene().getWindow();
+    stage.setUserData(image);
+    File file = fileChooser.showSaveDialog(stage);
   }
 
   /**
@@ -274,11 +289,12 @@ public class Controller {
    */
   public void encryptImage(MouseEvent mouseEvent)
       throws FileNotFoundException, InterruptedException {
-    // imageDisplay.imageProperty().setValue(null);
 
     Stage stage = new Stage();
-    if (imageCipher.getOriginalImage() != null) { // only proceed, if file was chosen
+    if (imageCipher.getCipherImage() != null) { // only proceed, if file was chosen
       imageCipher.start(stage);
+      Image image = imageCipher.getCipherImage();
+      imageDisplay.setImage(image);
     }
   }
 
@@ -287,7 +303,13 @@ public class Controller {
    *
    * @param mouseEvent - passed upon clicking on the Decrypt button in the pyctography tab
    */
-  public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException {
+  public void decryptImage(MouseEvent mouseEvent) throws FileNotFoundException, InterruptedException {
+    Stage stage = new Stage();
+    if (imageCipher.getCipherImage() != null) { // only proceed, if file was chosen
+      imageCipher.start(stage);
+      Image image = imageCipher.getCipherImage();
+      imageDisplay.setImage(image);
+    }
   }
 
 }

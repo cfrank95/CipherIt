@@ -1,5 +1,9 @@
+// FrankencipherV1 by Chris Frank
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 
 import javafx.scene.Group;
@@ -16,26 +20,17 @@ import javafx.stage.Stage;
 
 public class ImageCipher extends Application{
     // Create Image
-    Image originalImage;
-    Image cipheredImage;
+    Image cipherImage;
 
     ImageCipher(){
     }
 
-    void setOriginalImage(Image originalImage){
-        this.originalImage = originalImage;
+    void setCipherImage(Image originalImage){
+        this.cipherImage = originalImage;
     }
 
-    Image getOriginalImage(){
-        return originalImage;
-    }
-
-    void setCipheredImage(Image cipheredImage){
-        this.cipheredImage = cipheredImage;
-    }
-
-    Image getCipheredImage(){
-        return cipheredImage;
+    Image getCipherImage(){
+        return cipherImage;
     }
 
 
@@ -43,133 +38,147 @@ public class ImageCipher extends Application{
     public void start(Stage cipherStage) throws FileNotFoundException, InterruptedException {
         // Create Image
 
-        int numLocations = 10;
+        final int numLocations = 4;
         int numCells = (int) Math.pow(numLocations, 2);
-        int[] cells;
 
-        int offset = 4;
+        int iterations = 2;
 
         // Initialization of variables for image characteristics
-        int width = (int) originalImage.getWidth();
-        int height = (int) originalImage.getHeight();
-        int copyWidth = width / numLocations;
-        int copyHeight = height / numLocations;
+        int width = (int) cipherImage.getWidth() - (int) (cipherImage.getWidth() % 4);
+        int height = (int) cipherImage.getHeight() - (int) (cipherImage.getHeight() % 4);
 
-        cells = new int[numCells];
-        int[] encryptCells = new int[numCells];
-        for(int i = 0; i < numCells; i++) {
-            cells[i] = i;
-        }
-
-//        for(int o = 0; o < offset; o++) {
-//            for (int i = 0; i < numLocations; i++) {
-//                int test;
-//                int delta;
-//                int prev = count;
-//                int next = count + 1;
-//                int pairNums = numLocations / 2;
-//
-//                // Fix to alternate image
-//                for (int j = numLocations; j > 0; j--) {
-//                    test = count;
-//                    if (test > numCells) {
-//                        delta = test - numCells;
-//                        count = delta;
-//                        encryptCells[elem] = count;
-//                    } else
-//                        encryptCells[elem] = test;
-//                    if(pairNums > 1)
-//                        count += 2;
-//
-//                    else
-//                        count += 1;
-//                    elem++;
-//                }
-//                count++;
-//            }
-//        }
-
-        int count = offset;
-        int elem = 0;
-        for(int i = 0; i < numCells; i++){
-            int test = count + 1;
-            int delta;
-            if (test > numCells) {
-                delta = test - numCells;
-                count = i - delta;
-                encryptCells[i] = count;
-            }else{
-                encryptCells[i] = count;
-            }
-            count++;
-        }
 
         // Create a writable image
-        WritableImage wImage = new WritableImage(width, height);
-
 
         // Reading color from loaded image
-        PixelReader pixelReader = originalImage.getPixelReader();
+        PixelReader pixelReader = cipherImage.getPixelReader();
 
-        // Create Pixel Writer Object
-        PixelWriter writer = wImage.getPixelWriter();
+        // Creates an array to hold writable image objects
+        WritableImage[] wImages = new WritableImage[numCells];
+        PixelWriter[] writers = new PixelWriter[numCells];
 
-        // Reading color of image
-        int xElm = 0;
-        int yElm = 0;
-        int totalElm = 1;
+        for(int i = 0; i < writers.length; i++) {
 
-        while(totalElm < numCells + 1) {
+            wImages[i] = new WritableImage(width / 4, height / 4);
+            writers[i] = wImages[i].getPixelWriter();
+        }
 
-            yElm = 0;
-            while(yElm < numLocations) {
+        // *****
+        // PART 1: Read Image into Elements
+        // *****
 
-                xElm = 0;
-                while (xElm < numLocations) {
+        for(int y = 1; y < height; y++){
 
-                    int readY = yElm * copyHeight;
-                    for (int y = 0; y < copyHeight; y++) {
-                        int writeY;
+            for(int x = 1; x < width; x++){
 
-                        int readX = xElm  * copyWidth;
-                        int writeX;
-                        for (int x = 0; x < copyWidth; x++) {
-                            // Retrieving the color of the pixel of the loaded image
-                            Color color = pixelReader.getColor(readX, readY);
-                            readX++;
-                            writeX = (((encryptCells[xElm]) / numLocations) * copyWidth + x);
-                            writeY = (((encryptCells[yElm]) / numLocations) * copyHeight + y);
-                            writer.setColor(writeX, writeY, color);
-                        }
-                        readY++;
-                    }
-                    xElm++;
-                    totalElm++;
-                }
-                yElm++;
+                Color color = pixelReader.getColor(x, y);
+
+                int element = x / (width / 4) + 4 * (y / (height / 4));
+                int writeX = x % (width / 4);
+                int writeY = y % (height/ 4);
+                writers[element].setColor(writeX, writeY, color);
             }
         }
 
-        // Setting the view for the writable image
-        ImageView imageView = new ImageView(wImage);
-        imageView.fitHeightProperty();
-        imageView.fitWidthProperty();
+
+        // ******
+        // PART 2: Scramble element positions
+        // ******
+
+        int[] encryptedPositions = new int[numCells];
+        int[] tempPositions1 = new int[numCells];
+        int[] tempPositions2 = new int[numCells];
+
+        for(int i = 0; i < numCells; i++){
+            encryptedPositions[i] = i;
+            tempPositions1[i] = i;
+            tempPositions2[i] = i;
+        }
+
+        // Run iteration times
+        while(iterations > 0){
+
+            // Rule 2
+            for(int i = 4; i <= 11; i++){
+                switch (i) {
+                    case 4:
+                        tempPositions1[11] = encryptedPositions[i];
+                        break;
+                    case 5:
+                        tempPositions1[2] = encryptedPositions[i];
+                        break;
+                    case 6:
+                        tempPositions1[13] = encryptedPositions[i];
+                        break;
+                    case 7:
+                        tempPositions1[0] = encryptedPositions[i];
+                        break;
+                    case 8:
+                        tempPositions1[15] = encryptedPositions[i];
+                        break;
+                    case 9:
+                        tempPositions1[4] = encryptedPositions[i];
+                        break;
+                    case 10:
+                        tempPositions1[6] = encryptedPositions[i];
+                        break;
+                    case 11:
+                        tempPositions1[9] = encryptedPositions[i];
+                        break;
+                }
+            }
+
+            int ruleIncrement = 0;
+
+            while(ruleIncrement <= 3){
+                // Rule 1
+                tempPositions2[ruleIncrement * 2 + 1] = encryptedPositions[ruleIncrement];
+                // Rule 3
+                tempPositions2[ruleIncrement * 2 + 8] = encryptedPositions[ruleIncrement + 12];
+
+                ruleIncrement++;
+            }
+
+            for(int i = 0; i < numCells; i++){
+                if(i == 0 || i == 2 || i == 4 || i == 6 || i == 9 || i == 11 || i == 13 || i == 15)
+                    encryptedPositions[i] = tempPositions1[i];
+                else
+                    encryptedPositions[i] = tempPositions2[i];
+            }
+
+            iterations--;
+        }
 
 
 
-        // Creating a Group object
-        Group root = new Group(imageView);
+        // ******
+        // PART 3: Read Elements onto shared image
+        // ******
 
-        // Creating a scene object
-        Scene scene = new Scene(root, width, height);
+        // Creates main image that will be written on for final read
+        WritableImage wImage = new WritableImage(width, height);
+        PixelWriter writer = wImage.getPixelWriter();
 
-        // Setting title to the Stage
-        cipherStage.setTitle("Writing Image...");
+        // Read the writable image arrays to the overall image
+        for(int y = 0; y < height; y++){
 
-        // Adding scene to the stage
-        cipherStage.setScene(scene);
+            for(int x = 0; x < width; x++){
 
-        // Displaying contents of the stage
-        cipherStage.show();
+                int element = encryptedPositions[(x / (width / 4) + 4 * (y / (height / 4)))];
+                PixelReader elementReader = wImages[element].getPixelReader();
+                int readX = x % (width / 4);
+                int readY = y % (height / 4);
+                Color color = elementReader.getColor(readX, readY);
+
+                writer.setColor(x, y, color);
+            }
+
+        }
+
+        setCipherImage(wImage);
+
     }
+
+
+    // End start()
 }
